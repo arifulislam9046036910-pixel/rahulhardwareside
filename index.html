@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rahul Hardware</title>
+<style>
+:root{--navy:#142d4e;--blue:#1769aa;--pale:#edf5fc;--ink:#172334;--muted:#718096;--line:#e5ebf1;--bg:#f4f7fb;--green:#15966a;--red:#d94b55;--gold:#f0a629}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif;color:var(--ink)}
+.app{display:flex;min-height:100vh}.side{width:245px;background:var(--navy);color:white;padding:24px 16px;flex-shrink:0}.brand{display:flex;gap:12px;align-items:center;padding:0 8px 26px;border-bottom:1px solid #ffffff24}.logo{width:42px;height:42px;border-radius:12px;background:#fff;color:var(--blue);display:grid;place-items:center;font-weight:900;font-size:20px}.brand b{font-size:17px}.brand small{display:block;color:#b9c9dc;font-size:11px;margin-top:2px}.nav{margin-top:22px;display:grid;gap:7px}.nav button{border:0;background:transparent;color:#d7e3f0;text-align:left;padding:12px 13px;border-radius:10px;font-size:14px;cursor:pointer}.nav button.active,.nav button:hover{background:#ffffff1b;color:#fff}.nav span{display:inline-block;width:25px}.side-note{margin:35px 8px 0;color:#adc0d4;font-size:11px;line-height:1.7}.main{flex:1;min-width:0}.top{height:76px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px}.top h2{font-size:19px;margin:0}.top-right{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px}.avatar{width:34px;height:34px;border-radius:50%;background:#dcecf9;color:var(--blue);display:grid;place-items:center;font-weight:800}.content{padding:27px 30px;max-width:1300px;margin:auto}.welcome{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.welcome h1{font-size:23px;margin:0 0 5px}.welcome p{margin:0;color:var(--muted);font-size:13px}.tag{background:#e5f5ed;color:#13845d;padding:7px 11px;border-radius:20px;font-size:11px;font-weight:700}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}.card,.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px;box-shadow:0 3px 12px #20344d08}.stat-label{font-size:12px;color:var(--muted)}.stat-value{font-size:25px;font-weight:800;margin:8px 0 3px}.stat-foot{font-size:11px;color:var(--muted)}.stat-icon{float:right;background:var(--pale);color:var(--blue);width:34px;height:34px;border-radius:10px;display:grid;place-items:center}.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}.panel h3{font-size:15px;margin:0 0 16px}.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.quick button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:15px 10px;text-align:left;cursor:pointer}.quick button:hover{border-color:#8eb9dd;background:#f8fbff}.quick strong{display:block;font-size:13px;margin:8px 0 3px}.quick small{color:var(--muted);font-size:11px}.qicon{width:32px;height:32px;background:var(--pale);border-radius:9px;display:grid;place-items:center;color:var(--blue);font-size:17px}.rowline{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}.rowline:last-child{border:0}.pill{padding:4px 8px;border-radius:20px;font-size:10px;background:#e8f7ef;color:var(--green)}.pill.red{background:#fff0f0;color:var(--red)}.section{display:none}.section.show{display:block}.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:16px}.toolbar h1{font-size:22px;margin:0}.btn{border:0;border-radius:9px;background:var(--blue);color:white;padding:10px 15px;font-weight:700;cursor:pointer;font-size:12px}.btn.secondary{background:#eaf2f9;color:var(--blue)}input,select{padding:10px 11px;border:1px solid #dce4ed;border-radius:8px;font:inherit;font-size:12px;min-width:0;background:white}input:focus,select:focus{outline:2px solid #b7d8f2;border-color:#6ba6d8}.search{width:min(300px,100%)}table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:left;color:var(--muted);font-weight:600;background:#f8fafc}td,th{padding:12px 10px;border-bottom:1px solid var(--line)}.table-wrap{overflow:auto}.positive{color:var(--green);font-weight:700}.negative{color:var(--red);font-weight:700}.formgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:6px}.field input,.field select{width:100%}.form-actions{display:flex;gap:8px;margin-top:15px}.notice{background:#fff8e9;border:1px solid #f6e2b5;color:#8c6418;padding:12px;border-radius:10px;font-size:11px;margin-top:14px}.calcbox{max-width:650px}.calcresult{font-size:25px;font-weight:800;color:var(--blue);padding:18px;background:var(--pale);border-radius:12px;margin-top:14px}.muted{color:var(--muted)}.mobile-menu{display:none}
+
+.calc-card{border:1px solid #dce8f4;border-radius:15px;padding:16px;margin:13px 0;background:linear-gradient(135deg,#fbfdff,#f0f6fc);box-shadow:0 5px 16px #183d5a0b}
+.calc-card-blue{border-color:#b9d9f3;background:linear-gradient(135deg,#eef8ff,#e6f2ff)}
+.calc-card-gold{border-color:#f1d69c;background:linear-gradient(135deg,#fffaf0,#fff2d8)}
+.calc-card h4{margin:0 0 13px;font-size:13px;color:#174c79}
+.calc-card-gold h4{color:#8b5b0b}
+.calc-card .field label{font-weight:650;color:#50677e}
+.calc-card input,.calc-card select{border-radius:10px;border:1px solid #cbd9e7;background:#fff;min-height:42px;box-shadow:inset 0 1px 2px #102d4608}
+.calc-result-label{font-size:11px;color:#58718a;margin-top:12px;font-weight:700}
+.calcresult{font-size:22px;font-weight:850;color:#075b9b;padding:15px 17px;background:#fff;border:1px solid #c7e0f5;border-radius:12px;margin-top:7px;box-shadow:0 3px 10px #1769aa10}
+.gold-result{color:#8a5900;border-color:#f0d69f}
+
+.item-thumb{width:34px;height:34px;border-radius:8px;object-fit:cover;vertical-align:middle;margin-right:8px;background:#edf3f8}
+.item-edit-actions{display:flex;gap:6px;white-space:nowrap}
+.item-modal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.item-modal-grid .field.full{grid-column:1/-1}
+.item-modal-grid input,.item-modal-grid select{width:100%}
+.item-photo-row{display:flex;align-items:center;gap:12px;padding:12px;background:#f4f8fc;border:1px dashed #b8cee1;border-radius:12px;margin-bottom:15px}
+.item-photo-preview{width:64px;height:64px;flex:none;border-radius:11px;display:grid;place-items:center;overflow:hidden;background:#e3edf6;color:#54728d;font-size:24px}
+.item-photo-preview img{width:100%;height:100%;object-fit:cover}
+
+.party-suggestions{display:grid;gap:7px;margin-top:-4px}
+.party-suggestion{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 13px;border:1px solid #dbe8f3;border-radius:11px;background:#f8fbff;cursor:pointer;text-align:left;width:100%}
+.party-suggestion:hover{border-color:#78b5e2;background:#eff8ff}
+.party-suggestion b{font-size:12px}.party-suggestion small{display:block;color:#718096;font-size:10px;margin-top:3px}
+.party-summary-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:17px}
+.party-summary-strip>div{padding:13px;border-radius:12px;background:linear-gradient(135deg,#edf7ff,#f7fbff);border:1px solid #d8e9f7}
+.party-summary-strip small{display:block;color:#647b90;font-size:10px}.party-summary-strip b{display:block;color:#155b91;font-size:18px;margin-top:5px}
+.profile-head{display:flex;align-items:center;gap:12px;padding:13px;background:#f2f8fd;border:1px solid #dcebf6;border-radius:13px;margin-bottom:14px}
+.profile-avatar{width:48px;height:48px;border-radius:14px;background:#d9edfc;color:#1769aa;display:grid;place-items:center;font-size:20px;font-weight:800}
+.profile-head h3{margin:0;font-size:16px}.profile-head small{color:#718096;font-size:11px}
+.profile-balance{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:15px}
+.profile-balance>div{padding:13px;border:1px solid #e1eaf2;border-radius:12px;background:#fff}
+.profile-balance small{display:block;color:#718096;font-size:10px}.profile-balance b{font-size:20px;display:block;margin-top:5px}
+.ledger-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.ledger-action{border:1px solid #bfe4d1;background:linear-gradient(135deg,#edfff5,#f7fffa);color:#14794e;border-radius:12px;padding:13px;font-weight:800;cursor:pointer}
+.ledger-action.deposit{border-color:#b9d9f4;background:linear-gradient(135deg,#eef8ff,#f8fcff);color:#1769aa}
+.ledger-form{border:1px solid #e0e9f1;border-radius:13px;padding:14px;margin:12px 0;background:#fbfdff}
+.ledger-form .formgrid{grid-template-columns:1fr 1fr}
+.ledger-history{max-height:300px;overflow:auto}
+.ledger-entry{display:flex;justify-content:space-between;gap:12px;padding:12px 9px;border-bottom:1px solid #e9eef3;font-size:12px}
+.ledger-entry:last-child{border-bottom:0}
+.ledger-entry-main{min-width:0;flex:1}.ledger-edit-actions{display:flex;gap:6px;margin-top:7px}.ledger-edit-actions .table-action{font-size:10px;padding:4px 9px}.ledger-edit-actions .ledger-delete{color:#c43d48;border-color:#f0c7ca;background:#fff7f7}
+
+.ledger-entry small{display:block;color:#7b8794;font-size:10px;margin-top:4px}
+.ledger-entry .entry-credit{color:#d24b55;font-weight:800}.ledger-entry .entry-deposit{color:#13845d;font-weight:800}
+@media(max-width:650px){.party-summary-strip{grid-template-columns:1fr 1fr}.party-summary-strip>div:last-child{grid-column:span 2}.profile-balance{grid-template-columns:1fr 1fr}.ledger-form .formgrid{grid-template-columns:1fr}}
+.modal-backdrop{position:fixed;inset:0;z-index:100;background:#0b1c30a8;display:none;align-items:center;justify-content:center;padding:14px}
+.modal-backdrop.open{display:flex}
+.edit-modal{width:min(650px,100%);max-height:94vh;overflow:auto;background:#fff;border-radius:18px;padding:20px;box-shadow:0 20px 70px #071b3380}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.modal-head h3{margin:0;font-size:17px}
+.modal-close{border:0;background:#edf3f8;border-radius:9px;width:35px;height:35px;font-size:20px;cursor:pointer}
+@media(max-width:650px){.item-modal-grid{grid-template-columns:1fr 1fr}.edit-modal{padding:15px}}
+@media(max-width:390px){.item-modal-grid{grid-template-columns:1fr}}
+
+@media(max-width:900px){.side{width:205px}.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.content{padding:22px}}
+@media(max-width:650px){.app{display:block}.side{width:auto;padding:12px 13px}.brand{padding:0 4px 10px;border:0}.brand small{display:none}.nav{display:flex;overflow:auto;margin:10px 0 0;gap:5px}.nav button{white-space:nowrap;padding:9px 11px;font-size:11px}.nav span{width:auto;margin-right:5px}.side-note{display:none}.top{height:58px;padding:0 16px}.top h2{font-size:15px}.top-right{font-size:11px}.content{padding:18px 14px}.welcome h1{font-size:19px}.stats{gap:9px}.card{padding:13px}.stat-value{font-size:20px}.quick{grid-template-columns:repeat(2,1fr)}.formgrid{grid-template-columns:1fr 1fr}.toolbar{align-items:flex-start;flex-wrap:wrap}.toolbar h1{font-size:19px}}
+@media(max-width:390px){.formgrid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}}
+
+/* Rahul Hardware: full-screen mobile-first home redesign */
+.app{display:block;min-height:100vh}.side{display:none}.main{width:100%}.top{height:68px;padding:0 clamp(14px,3vw,34px);position:sticky;top:0;z-index:20;box-shadow:0 2px 12px #17324d0a}.top-home{border:0;background:#eaf3fb;color:#1769aa;border-radius:11px;padding:9px 13px;font-weight:800;cursor:pointer}.top-left{display:flex;align-items:center;gap:12px}.content{max-width:1180px;padding:22px clamp(13px,3vw,34px) 40px}.welcome{align-items:flex-start}.welcome h1{font-size:clamp(21px,3vw,29px);font-weight:900;color:#163b5e}.welcome p{font-size:13px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.card{border-radius:18px;padding:19px;min-height:132px;box-shadow:0 8px 22px #16324d0b}.card:nth-child(1){background:linear-gradient(145deg,#e8f5ff,#fff);border-color:#cce6fa}.card:nth-child(2){background:linear-gradient(145deg,#eafff3,#fff);border-color:#ccefdc}.card:nth-child(3){background:linear-gradient(145deg,#fff5e7,#fff);border-color:#f4dfbd}.card:nth-child(4){background:linear-gradient(145deg,#f2edff,#fff);border-color:#ded4fa}.stat-label{font-size:13px;font-weight:750;color:#536b80}.stat-value{font-size:clamp(21px,2.5vw,29px);font-weight:900;color:#183b59}.stat-foot{font-size:11px}.dashboard-filter{display:flex;flex-wrap:wrap;align-items:end;gap:10px;padding:14px 16px;margin:-3px 0 17px;background:#fff;border:1px solid #e1eaf2;border-radius:16px;box-shadow:0 4px 15px #17324d08}.dashboard-filter .field{min-width:145px;flex:1}.dashboard-filter label{font-size:11px;font-weight:750}.dashboard-filter select,.dashboard-filter input{width:100%;min-height:42px}.filter-caption{font-size:11px;color:#647b90;padding-bottom:10px}.home-section-title{font-size:17px;font-weight:900;margin:22px 0 12px;color:#1a3d5d}.home-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.home-tile{min-height:116px;border:1px solid #dce7f0;border-radius:18px;padding:17px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;box-shadow:0 7px 18px #16324d0b;transition:transform .15s,box-shadow .15s}.home-tile:active{transform:scale(.98)}.home-tile .tile-icon{font-size:25px;width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:#ffffffb8}.home-tile strong{font-size:16px;font-weight:900;margin-top:13px}.home-tile small{font-size:11px;opacity:.78;margin-top:3px}.tile-blue{background:linear-gradient(140deg,#e4f3ff,#f5fbff);color:#155b91;border-color:#c5e3f8}.tile-green{background:linear-gradient(140deg,#e5fff0,#f5fff9);color:#13744b;border-color:#c7ecd8}.tile-orange{background:linear-gradient(140deg,#fff0d9,#fffaf1);color:#94600e;border-color:#f2ddb6}.tile-purple{background:linear-gradient(140deg,#f0eaff,#fbf9ff);color:#6844a2;border-color:#ded1fa}.tile-pink{background:linear-gradient(140deg,#ffeaf0,#fff8fa);color:#a33d62;border-color:#f4d2df}.tile-teal{background:linear-gradient(140deg,#e1fbf8,#f5fffe);color:#16766e;border-color:#c7ebe6}.secondary-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.secondary-tiles .home-tile{min-height:84px;flex-direction:row;align-items:center;justify-content:flex-start;gap:13px;padding:13px 16px}.secondary-tiles .tile-icon{width:40px;height:40px;font-size:20px}.secondary-tiles strong{margin:0;font-size:14px}.secondary-tiles small{display:block}.dashboard-lower{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}.section:not(#dashboard){min-height:65vh}.toolbar h1{font-weight:900}.panel{border-radius:17px}
+@media(max-width:760px){.settings-menu{top:66px;right:10px;max-height:calc(100dvh - 78px)}.top{height:60px}.content{padding-top:17px}.welcome{gap:10px}.tag{white-space:nowrap}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.card{padding:14px;min-height:116px}.stat-icon{width:30px;height:30px}.home-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.home-tile{min-height:112px;padding:14px;border-radius:16px}.home-tile strong{font-size:14px}.home-tile .tile-icon{width:42px;height:42px;font-size:22px}.dashboard-lower{grid-template-columns:1fr}.dashboard-filter{gap:8px}.dashboard-filter .field{min-width:calc(50% - 8px)}.filter-caption{width:100%;padding:0}.top-right{gap:7px}.top-right span{font-size:10px}}
+@media(min-width:761px) and (max-width:1000px){.home-tiles{grid-template-columns:repeat(3,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* Final mobile-friendly polish */
+.home-tiles .home-tile{min-height:128px}
+.quick-actions .home-tile{min-height:82px}
+.calcbox{max-width:760px}
+.calcbox>.panel{box-shadow:none}
+.calcbox .formgrid{grid-template-columns:1fr 1fr}
+#calculator .panel{padding:clamp(15px,3vw,24px)}
+#calculator .calc-card{padding:clamp(14px,2.5vw,20px)}
+#calculator .field label{font-size:13px;font-weight:800;color:#425d75}
+#calculator input,#calculator select{font-size:15px;min-height:48px}
+#calculator .calcresult{font-size:clamp(21px,4vw,28px);line-height:1.35}
+@media(max-width:600px){.home-tiles{grid-template-columns:1fr 1fr}.home-tile{min-height:124px}.quick-actions{grid-template-columns:1fr}.quick-actions .home-tile{min-height:76px}.calcbox .formgrid{grid-template-columns:1fr}.welcome{flex-wrap:wrap}.dashboard-filter .field{min-width:100%}}
+
+
+.settings-wrap{position:static}.settings-btn{border:1px solid #dce7f0;background:#f5f9fc;color:#244c6d;border-radius:11px;padding:9px 12px;font-weight:800;cursor:pointer;font-size:12px}.settings-menu{display:none;position:fixed;right:clamp(10px,3vw,34px);top:74px;width:min(330px,calc(100vw - 20px));max-height:calc(100dvh - 90px);overflow:auto;background:#fff;border:1px solid #dce7f0;border-radius:15px;box-shadow:0 16px 42px #17324d30;padding:10px;z-index:1000}.settings-menu.open{display:block}.settings-menu>button{display:block;width:100%;border:0;background:#fff;text-align:left;padding:12px;border-radius:9px;font-weight:750;color:#244c6d;cursor:pointer}.settings-menu>button:hover{background:#eef6fc}
+
+/* Compact dashboard settings: keep secondary information off the home screen. */
+.settings-menu{width:min(330px,calc(100vw - 20px));max-height:calc(100dvh - 90px);overflow:auto;padding:10px}
+.settings-group{padding:5px 5px 11px;border-bottom:1px solid var(--line);margin-bottom:5px}
+.settings-group>b{display:block;font-size:12px;color:#244c6d;margin:2px 3px 8px}
+.settings-group .field{margin:7px 0}.settings-group select,.settings-group input{width:100%;font-size:12px;padding:9px}
+.settings-group label{display:block;font-size:10px;color:var(--muted);margin-bottom:4px}
+.filter-caption{font-size:10px;color:var(--muted);padding:4px 2px}
+.settings-details{border-top:1px solid var(--line);padding:9px 5px;font-size:12px;color:#244c6d}
+.settings-details summary{font-weight:750;cursor:pointer}.settings-details #dashRecentBills,.settings-info,.settings-note{font-size:11px;line-height:1.7;color:var(--muted);padding-top:7px}
+.settings-note{margin:4px 0 0}
+
+
+/* Full-page Khata Book inspired by the supplied mobile reference screens */
+.khata-mobile-head{background:#1156a5;color:#fff;margin:-27px -30px 0;padding:22px 18px 16px;border-radius:0 0 0 0}
+.khata-brandline{display:flex;align-items:center;gap:12px;font-size:19px;font-weight:800;margin-bottom:22px}
+.khata-tabs{display:flex;gap:26px;margin:0 0 -16px 16px}.khata-tabs button{border:0;background:none;color:#d9e9fb;padding:10px 12px 12px;font-weight:750;font-size:14px;border-bottom:4px solid transparent;cursor:pointer}.khata-tabs button.active{color:#fff;border-color:#f5b52c}
+.khata-overview{background:#fff;border-radius:16px;margin:0 -12px 14px;padding:14px 16px 0;box-shadow:0 4px 14px #102d4618;color:#26364a}
+.khata-overview-values{display:grid;grid-template-columns:1fr 1fr;text-align:center}.khata-overview-values>div+div{border-left:1px dotted #d5dce5}.khata-overview-values small{display:block;color:#667085}.khata-overview-values b{display:block;font-size:23px;margin-top:4px}.khata-report{display:block;width:calc(100% + 32px);margin:12px -16px 0;border:0;border-radius:0 0 16px 16px;padding:12px;background:#e7f0fa;color:#155a9e;font-weight:800;font-size:15px;cursor:pointer}
+.khata-tools{display:flex;gap:9px;margin:14px 0 12px}.khata-searchbox{flex:1;display:flex;align-items:center;gap:9px;border:1px solid #d8e0e9;border-radius:12px;background:#fff;padding:0 12px}.khata-searchbox input{border:0;outline:0;flex:1;width:100%;font-size:14px}.khata-filter{border:1px solid #1769aa;background:#fff;color:#1769aa;border-radius:12px;padding:10px;font-weight:700}.khata-party-list{background:#fff;border-radius:13px;overflow:hidden}.khata-party-card{width:100%;border:0;border-bottom:1px solid #edf0f3;background:#fff;display:flex;align-items:center;gap:12px;text-align:left;padding:13px 14px;cursor:pointer}.khata-party-card:active{background:#f3f8fc}.khata-party-avatar{width:42px;height:42px;border-radius:50%;background:#f1f3f5;color:#656b72;display:grid;place-items:center;font-weight:800;flex:none}.khata-party-info{min-width:0;flex:1}.khata-party-info b{display:block;font-weight:600;font-size:14px;color:#171c24}.khata-party-info small{display:block;color:#7b818a;font-size:11px;margin-top:3px}.khata-party-amount{min-width:110px;text-align:right;padding:4px 0 4px 8px}.khata-party-amount b{font-size:18px;color:#a21e36}.khata-party-amount b.advance{color:#12805d}.khata-party-amount small{display:block;color:#1b5a95;font-size:11px;margin-top:3px}
+.profile-fullscreen{position:fixed;inset:0;z-index:200;background:#f0f1f4;display:none;overflow:auto;padding:0}.profile-fullscreen.open{display:block}.profile-fullscreen .edit-modal{width:100%;max-width:none;max-height:none;min-height:100vh;height:auto;border-radius:0;padding:0;overflow:visible;box-shadow:none;background:#f0f1f4}.profile-appbar{background:#1156a5;color:#fff;display:flex;align-items:center;gap:14px;padding:18px 20px;position:sticky;top:0;z-index:3}.profile-appbar button{border:0;background:none;color:white;font-size:26px;cursor:pointer}.profile-appbar .profile-app-title{flex:1;min-width:0}.profile-app-title b{display:block;font-size:17px}.profile-app-title small{display:block;font-size:12px;color:#d8e8fa;margin-top:3px}.profile-appbar .profile-phone{font-size:22px}.profile-page-body{padding:16px 13px 100px}.profile-page-balance{background:#fff;border-radius:5px;margin-bottom:12px;overflow:hidden}.profile-page-balance .balance-main{display:flex;justify-content:space-between;align-items:center;padding:18px 16px;font-size:16px}.profile-page-balance .balance-main b{font-size:23px;color:#a51e36}.profile-reminder{padding:15px;background:#e6f0fa;color:#205b91;display:flex;justify-content:space-between;gap:8px;font-size:13px}.profile-shortcuts{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;margin:0 -13px 14px;padding:16px 4px}.profile-shortcuts button{border:0;background:none;color:#155a9e;font-size:13px;display:grid;gap:6px;justify-items:center;cursor:pointer}.profile-shortcuts span{font-size:23px}.profile-date-label{text-align:center;color:#7b8491;font-size:12px;padding:12px}.profile-history-head{display:grid;grid-template-columns:1fr 1fr 1fr;color:#808894;font-size:11px;padding:8px 3px}.profile-page-history{display:grid;gap:10px}.profile-history-card{display:grid;grid-template-columns:1fr 1fr;min-height:92px;background:#fff;border:1px solid #e0e3e7;border-radius:8px;overflow:hidden;box-shadow:0 1px 2px #0000000c}.profile-history-card .history-meta{padding:13px 12px;font-size:12px}.profile-history-card .history-meta small{display:block;color:#a13b4c;background:#fbf4f5;border-radius:5px;margin-top:12px;padding:4px;width:max-content}.profile-history-card .history-value{display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700}.history-value.debt{color:#a21e36;background:#fbf5f6}.history-value.deposit{color:#13805d;background:#f3faf7}.profile-bottom-actions{position:fixed;bottom:0;left:0;right:0;background:#fff;padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px;z-index:4;box-shadow:0 -3px 14px #142d4e12}.profile-bottom-actions button{border:0;border-radius:6px;color:white;padding:15px 8px;font-weight:800;font-size:14px;background:#b20e2d}.profile-bottom-actions button+button{background:#087c57}
+.profile-settings-page{background:#fff;min-height:calc(100vh - 65px);padding:20px 0 35px}.profile-settings-section{padding:0 24px}.profile-settings-row{padding:19px 0;border-bottom:1px solid #f0f1f3;display:flex;align-items:center;gap:18px}.profile-settings-row .setting-icon{font-size:22px;width:32px;text-align:center;color:#555}.profile-settings-row .setting-copy{flex:1}.profile-settings-row small{display:block;color:#858b93;font-size:12px;margin-bottom:3px}.profile-settings-row b{font-size:15px;font-weight:500}.profile-settings-label{background:#f0f1f4;color:#858b93;font-size:12px;padding:17px 25px;margin-top:15px}.profile-settings-danger{margin:28px 24px 0;width:calc(100% - 48px);border:1px solid #c62c4b;color:#bd2344;background:#fff;border-radius:7px;padding:15px;font-weight:800;font-size:14px;cursor:pointer}.profile-settings-warning{margin:12px 24px;color:#7c8490;font-size:11px;line-height:1.6}.profile-settings-page input{width:100%;font-size:14px}
+@media(max-width:650px){.khata-mobile-head{margin:-18px -14px 0;padding:18px 14px 14px}.khata-overview{margin-left:-2px;margin-right:-2px}.khata-party-amount{min-width:95px}.khata-party-amount b{font-size:16px}.profile-appbar{padding:15px 13px}.profile-page-body{padding-left:10px;padding-right:10px}.profile-shortcuts{margin-left:-10px;margin-right:-10px}.profile-settings-section{padding:0 18px}.profile-settings-danger{margin-left:18px;width:calc(100% - 36px)}}
+
+
+.calc-cart-panel{margin-top:18px;border:1px solid #dce8f4;border-radius:14px;padding:14px;background:#fff}.calc-cart-heading,.calc-cart-total{display:flex;justify-content:space-between;align-items:center;gap:10px}.calc-cart-heading h3{margin:0 0 12px}.calc-cart-total{border-top:1px solid var(--line);margin-top:12px;padding-top:14px}.calc-cart-total strong{font-size:24px;color:var(--blue)}.calc-cart-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.calc-cart-bottom{justify-content:flex-end}.calc-cart-panel table{min-width:520px}
+
+/* Refined compact calculator layout */
+.calcbox{max-width:900px}
+.calc-headline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.calc-headline h3{margin:0 0 3px;font-size:17px;color:#173d5c}
+.calc-headline small,.calc-unit-row small{display:block;color:#718397;font-size:11px;margin-top:3px}
+.calc-chip{font-size:9px;letter-spacing:1px;font-weight:900;color:#1765a0;background:#eaf5ff;border:1px solid #cfe6fa;padding:7px 10px;border-radius:20px;white-space:nowrap}
+.calc-product-row{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:10px;align-items:end}
+.calc-product-row .field label{font-size:10px;font-weight:800;margin-bottom:5px;color:#50677e}
+.calc-product-row input,.calc-product-row select{width:100%;height:40px;min-height:40px;padding:8px 9px;font-size:12px;border-radius:9px}
+.calc-input-card{margin-top:14px!important;padding:15px!important}
+.calc-unit-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.calc-unit-row b{font-size:13px;color:#174c79}
+.calc-unit-field{width:112px;margin:0}
+.calc-unit-field label{font-size:10px!important;margin-bottom:4px!important}
+.calc-unit-field select{width:100%;height:34px;min-height:34px;padding:5px 8px;font-size:11px}
+.calc-big-inputs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.calc-big-inputs .field label{font-size:12px;font-weight:850;color:#284d6b;margin-bottom:7px}
+.calc-big-inputs input{height:56px;min-height:56px;font-size:21px;font-weight:800;padding:10px 13px;border:1.5px solid #b9d5eb;border-radius:12px}
+.calc-big-inputs input:focus{border-color:#3989c7;box-shadow:0 0 0 3px #3989c71a;outline:0}
+#calculator .calcresult{font-size:22px;padding:13px 16px}
+@media(max-width:600px){.calc-product-row{grid-template-columns:1.05fr 1fr 1fr;gap:6px}.calc-product-row input,.calc-product-row select{font-size:10px;padding:7px 5px;height:38px;min-height:38px}.calc-product-row .field label{font-size:9px}.calc-big-inputs{gap:8px}.calc-big-inputs input{height:54px;min-height:54px;font-size:18px;padding:8px}.calc-unit-field{width:100px}.calc-headline h3{font-size:15px}.calc-chip{font-size:8px;padding:6px 7px}}
+
+
+/* Sand calculator integrated module */
+#sandcalc .sand-wrap{max-width:850px;display:grid;gap:12px}
+#sandcalc .sand-card{background:#fff;border:1px solid #dfe8f1;border-radius:16px;padding:15px;box-shadow:0 4px 14px #17324d08}
+#sandcalc .sand-card h3{font-size:15px;margin:0 0 12px;color:#183b59}
+#sandcalc .sand-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#sandcalc label{display:block;font-size:11px;font-weight:750;color:#60758a;margin-bottom:5px}
+#sandcalc input{width:100%;min-height:43px;font-size:14px}
+#sandcalc .sand-presets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+#sandcalc .sand-preset{border:1px solid #d8e5ef;background:#f8fbfe;color:#244763;border-radius:12px;padding:12px;text-align:left;min-height:68px}
+#sandcalc .sand-preset.active{border:2px solid #1769aa;background:#edf6ff;padding:11px}
+#sandcalc .sand-preset b{display:block;font-size:13px}#sandcalc .sand-preset small{font-size:10px;color:#6a7f92}
+#sandcalc .sand-summary{background:#edf6ff;border:1px solid #d4e8f8;border-radius:12px;padding:12px}
+#sandcalc .sand-line{display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:5px 0}
+#sandcalc .sand-grand{background:#eaf8f0;border:1px solid #ccebd8;border-radius:13px;padding:14px;text-align:center}
+#sandcalc .sand-grand strong{display:block;font-size:clamp(24px,5vw,32px);color:#138153;margin:5px 0}
+#sandcalc .sand-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}#sandcalc .sand-actions button{flex:1;min-width:120px}
+#sandcalc .sand-muted{font-size:10px;color:#74879a;line-height:1.6}
+#sandcalc .sand-warning{color:#b42332;background:#fff0f1;border:1px solid #f2c9ce;padding:10px;border-radius:10px;font-size:12px;font-weight:800;margin-top:8px}
+#sandcalc .sand-hidden{display:none!important}
+#sandcalc .sand-editor{padding:11px;background:#f7f9fc;border:1px solid #e2e9f0;border-radius:11px;margin:9px 0}
+@media(max-width:520px){#sandcalc .sand-grid{gap:8px}#sandcalc .sand-card{padding:13px}#sandcalc .sand-preset{padding:10px;min-height:64px}}
+
+</style>
+<link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#142d4e">
+</head>
+<body>
+<div class="app">
+<aside class="side">
+ <div class="brand"><div class="logo">RH</div><div><b>Rahul Hardware</b></div></div>
+ <nav class="nav">
+  <button class="active" data-page="dashboard"><span>⌂</span> ড্যাশবোর্ড</button>
+  <button data-page="calculator"><span>％</span> ক্যালকুলেটর</button>
+  <button data-page="items"><span>▦</span> আইটেম</button>
+  <button data-page="billing"><span>▤</span> বিলিং</button>
+  <button data-page="khata"><span>▣</span> খাতা বুক</button>
+  <button data-page="reports"><span>▥</span> রিপোর্ট</button>
+  <button data-page="backup"><span>↻</span> ব্যাকআপ</button>
+  <button data-page="sandcalc"><span>▧</span> বালির হিসাব</button>
+ </nav>
+ <div class="side-note">জানকিনগর, পলাশী মনুমেন্ট রোড<br>নদীয়া – ৭৪১১৫৭<br>☎ 9046036910</div>
+</aside>
+<main class="main">
+<header class="top"><div class="top-left"><button class="top-home" onclick="showPage('dashboard')">⌂ হোম</button><h2 id="pageTitle">ড্যাশবোর্ড</h2></div><div class="top-right"><span>Rahul Hardware</span><div class="settings-wrap"><button class="settings-btn" type="button" onclick="toggleSettingsMenu(event)" id="settingsBtn" aria-label="সেটিংস" aria-expanded="false" aria-controls="settingsMenu">⚙️ <span>সেটিংস</span></button><div class="settings-menu" id="settingsMenu">
+ <div class="settings-group"><b>সময়ের হিসাব</b><div class="field"><select id="dashRange" aria-label="সময়ের হিসাব বেছে নিন" onchange="updateDashboardRange()"><option value="today">আজকের হিসাব</option><option value="yesterday">গতকালের হিসাব</option><option value="7">গত ৭ দিন</option><option value="30">গত ৩০ দিন</option><option value="180">গত ৬ মাস</option><option value="365">গত ১ বছর</option><option value="3650">গত ১০ বছর</option><option value="custom">নিজে তারিখ বেছে নিন</option></select></div>
+ <div class="field" id="dashFromWrap" style="display:none"><label for="dashFrom">শুরুর তারিখ</label><input id="dashFrom" type="date" onchange="updateDashboardRange()"></div><div class="field" id="dashToWrap" style="display:none"><label for="dashTo">শেষ তারিখ</label><input id="dashTo" type="date" onchange="updateDashboardRange()"></div><div class="filter-caption" id="dashRangeCaption">আজকের হিসাব দেখানো হচ্ছে</div></div>
+ <button type="button" onclick="showPage('reports');closeSettingsMenu()">▥ রিপোর্ট ও হিসাব</button><button type="button" onclick="showPage('backup');closeSettingsMenu()">↻ ব্যাকআপ ও Restore</button>
+ <details class="settings-details"><summary>সাম্প্রতিক বিল</summary><div id="dashRecentBills" class="muted">এখনো কোনো বিল সেভ হয়নি।</div></details>
+ <details class="settings-details"><summary>দোকানের তথ্য ও ডেটা অবস্থা</summary><div class="settings-info"><div>রাহুল হার্ডওয়্যার · জানকিনগর</div><div>যোগাযোগ: 9046036910</div><div>ডেটা এই ডিভাইসেই সংরক্ষিত</div></div><p class="settings-note">নোট: বিক্রি ও লাভের হিসাব সংরক্ষিত বিল থেকে গণনা করা হবে।</p></details>
+ </div></div><div class="avatar">RH</div></div></header>
+<div class="content">
+<section class="section show" id="dashboard">
+ <div class="welcome"><div><h1>Rahul Hardware</h1><p>আপনার দোকানের সব কাজ এক পেজ থেকে পরিচালনা করুন।</p></div></div>
+ <div class="stats">
+  <div class="card"><span class="stat-icon">₹</span><div class="stat-label">বিক্রি</div><div class="stat-value" id="dashSalesValue">₹ 0</div><div class="stat-foot" id="salesRangeFoot">নির্বাচিত সময়</div></div>
+  <div class="card"><span class="stat-icon">↗</span><div class="stat-label">আনুমানিক লাভ</div><div class="stat-value" id="dashProfitValue">₹ 0</div><div class="stat-foot" id="profitRangeFoot">নির্বাচিত সময়</div></div>
+  <div class="card"><span class="stat-icon">৳</span><div class="stat-label">বর্তমান মোট পাওনা</div><div class="stat-value" id="dashTotalDueValue">₹ 0</div><div class="stat-foot">সব পার্টির বর্তমান বকেয়া</div></div>
+ </div>
+ <div class="home-section-title">প্রধান কাজ</div>
+ <div class="home-tiles">
+  <button class="home-tile tile-blue" onclick="showPage('calculator')"><span class="tile-icon">％</span><strong>ক্যালকুলেটর</strong><small>KG / GRAM · অটো দাম হিসাব</small></button>
+  <button class="home-tile tile-green" onclick="showPage('khata')"><span class="tile-icon">▣</span><strong>খাতা বুক</strong><small>কাস্টমার · ধার · জমা</small></button>
+  <button class="home-tile tile-orange" onclick="showPage('items')"><span class="tile-icon">▦</span><strong>আইটেম / স্টক</strong><small>নতুন আইটেম · দাম আপডেট</small></button>
+  <button class="home-tile tile-purple" onclick="showPage('billing')"><span class="tile-icon">▤</span><strong>বিলিং</strong><small>নতুন বিল তৈরি ও হিসাব</small></button>
+  <button class="home-tile tile-teal" onclick="showPage('sandcalc')"><span class="tile-icon">▧</span><strong>বালির হিসাব</strong><small>সরু · মোটা · গামলা · ট্রাক্টর</small></button>
+ </div>
+</section>
+<section class="section" id="calculator">
+ <div class="toolbar"><h1>ক্যালকুলেটর</h1><span class="tag">সহজ অটো হিসাব</span></div>
+ <div class="panel calcbox">
+  <div class="calc-headline"><div><h3>দ্রুত পণ্য হিসাব</h3><small>আইটেম বাছুন, দর বসান, পরিমাণ দিন</small></div><span class="calc-chip">AUTO CALCULATOR</span></div>
+  <div class="calc-product-row">
+   <div class="field"><label>আইটেম বেছে নিন</label><select id="calcItem" onchange="selectCalcItem()"><option value="">ম্যানুয়ালি</option></select></div>
+   <div class="field"><label>আইটেমের নাম</label><input id="calcManualName" type="text" placeholder="নাম লিখুন"></div>
+   <div class="field"><label id="calcPriceLabel">বিক্রয় মূল্য / KG (₹)</label><input id="kgPrice" type="number" min="0" placeholder="দর লিখুন" oninput="calcManualPriceChanged()"></div>
+  </div>
+  <div class="calc-card calc-card-blue calc-input-card">
+   <div class="calc-unit-row"><div><b>পরিমাণ ও মোট মূল্য</b><small>যেকোনো একটি লিখলে অন্যটি অটো হিসাব হবে</small></div><div class="field calc-unit-field"><label>ইউনিট</label><select id="qtyUnit" onchange="calcBoth('unit')"><option value="1000" selected>কেজি (KG)</option><option value="1">গ্রাম (G)</option></select></div></div>
+   <div class="calc-big-inputs">
+    <div class="field"><label>পরিমাণ লিখুন</label><input id="grams" type="number" min="0" placeholder="যেমন ৫" oninput="calcBoth('qty')"></div>
+    <div class="field"><label>মূল্য লিখুন (₹)</label><input id="money" type="number" min="0" placeholder="যেমন ১০০" oninput="calcBoth('money')"></div>
+   </div>
+   <div class="calcresult" id="calcResult" style="margin-top:14px">দাম ও পরিমাণ লিখলে হিসাব দেখাবে</div>
+   <div class="muted" id="moneyResult" style="margin-top:8px">পরিমাণ বা টাকা—যেকোনো একটি লিখলেই অন্যটি অটোমেটিক বের হবে।</div>
+  </div>
+  <div class="calc-cart-actions"><button class="btn" onclick="addCalcCartItem()">＋ এই আইটেম বিলের তালিকায় অ্যাড করুন</button></div>
+  <div class="calc-cart-panel">
+   <div class="calc-cart-heading"><h3>আপনার বিলের আইটেম</h3><span class="tag" id="calcCartCount">০টি আইটেম</span></div>
+   <div class="table-wrap"><table><thead><tr><th>আইটেম</th><th>পরিমাণ</th><th>দর</th><th>মোট</th><th>বাদ</th></tr></thead><tbody id="calcCartRows"><tr><td colspan="5" class="muted">এখনো কোনো আইটেম যোগ করা হয়নি।</td></tr></tbody></table></div>
+   <div class="calc-cart-total"><span>সর্বমোট বিল</span><strong id="calcCartTotal">₹ ০</strong></div>
+   <div class="calc-cart-actions calc-cart-bottom"><button class="btn secondary" onclick="clearCalcCart()">সব আইটেম মুছুন</button><button class="btn secondary" onclick="shareCalcCart()">WhatsApp শেয়ার</button><button class="btn" onclick="createBillFromCalc()">বিল তৈরি করুন →</button></div>
+  </div>
+  <p class="muted" style="font-size:12px;margin-top:12px">আইটেমের দাম ও ইউনিট স্টক/আইটেম থেকে অটোমেটিক আসবে। হিসাব করার পরে অ্যাড চাপলেই শুধু বিলের তালিকায় যোগ হবে। বিল তৈরি করলে বিলিং সেকশনে গিয়ে কাস্টমারের নাম দিয়ে বিল সেভ করতে পারবে।</p>
+ </div>
+</section>
+<section class="section" id="items">
+ <div class="toolbar"><h1>আইটেম / স্টক</h1><button class="btn" onclick="addItem()">＋ নতুন আইটেম</button></div>
+ <div class="panel"><input class="search" id="itemSearch" placeholder="আইটেমের নাম বা কোড খুঁজুন..." oninput="renderItems()"><div class="table-wrap"><table><thead><tr><th>নাম / কোড</th><th>ইউনিট</th><th>বিক্রয় মূল্য</th><th>ক্রয় মূল্য</th><th>স্টক</th><th>লাভ / ইউনিট</th><th>কাস্টমাইজ</th></tr></thead><tbody id="itemRows"></tbody></table></div></div>
+ <div class="notice">যেকোনো আইটেমের নাম, কোড, ছবি, ইউনিট, বিক্রয়মূল্য, ক্রয়মূল্য ও স্টক পরে আবার পরিবর্তন করতে পারবে। পরিবর্তন এই ব্রাউজারে সেভ থাকবে।</div>
+</section>
+<section class="section" id="billing">
+ <div class="toolbar"><h1>নতুন বিল তৈরি</h1><span class="tag">বিল ও খাতা সংযুক্ত</span></div>
+ <div class="panel">
+  <div class="formgrid">
+   <div class="field"><label>কাস্টমারের নাম</label><input id="custName" placeholder="নাম লিখুন" list="customerOptions" oninput="refreshCustomerDue()"><datalist id="customerOptions"></datalist></div>
+   <div class="field"><label>মোবাইল নম্বর</label><input id="custPhone" placeholder="মোবাইল নম্বর" oninput="refreshCustomerDue()"></div>
+   <div class="field"><label>বিল নম্বর</label><input id="billNumber" readonly></div>
+  </div>
+  <div class="formgrid" style="margin-top:12px">
+   <div class="field"><label>বিলের তারিখ</label><input id="billDate" type="date"></div>
+   <div class="field"><label>আগের পাওনা / অগ্রিম</label><input id="oldDue" readonly value="₹ 0"></div>
+   <div class="field"><label>আইটেম বেছে নিন</label><select id="billItem" onchange="billPickItem()"></select></div>
+  </div>
+  <div class="formgrid" style="margin-top:12px">
+   <div class="field"><label>ম্যানুয়াল আইটেমের নাম (সরাসরি যোগ)</label><input id="manualBillName" placeholder="আইটেম সিলেক্ট না করলে নাম লিখুন"></div>
+   <div class="field"><label>ইউনিট</label><select id="billUnit"><option>KG</option><option>GRAM</option><option>CFT</option><option>TON</option><option>PCS</option><option>BAG</option><option>TRACTOR</option></select></div>
+   <div class="field"><label>পরিমাণ</label><input id="billQty" type="number" min="0.001" step="any" placeholder="পরিমাণ লিখুন"></div>
+  </div>
+  <div class="formgrid" style="margin-top:12px">
+   <div class="field"><label>বিক্রয় দর (₹)</label><input id="billRate" type="number" min="0" step="0.01" placeholder="দর লিখুন"></div>
+   <div class="field"><label>দাম বেছে নেওয়া আইটেমের</label><input id="billSelectedInfo" readonly placeholder="আইটেম বেছে নিলে তথ্য দেখাবে"></div>
+   <div class="field" style="justify-content:end"><label>&nbsp;</label><button class="btn" onclick="addBillLine()">＋ বিলের আইটেম যোগ করুন</button></div>
+  </div>
+  <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>আইটেম</th><th>পরিমাণ</th><th>দর</th><th>মোট</th><th>অ্যাকশন</th></tr></thead><tbody id="billRows"></tbody></table></div>
+  <div class="form-actions"><button class="btn secondary" onclick="resetBill()">সব আইটেম মুছুন</button></div>
+  <div style="display:flex;justify-content:flex-end;margin-top:15px;gap:25px;align-items:center"><span class="muted">বিলের মোট</span><strong id="billTotal" style="font-size:23px;color:var(--blue)">₹ 0</strong></div>
+  <div class="formgrid" style="margin-top:16px">
+   <div class="field"><label>এখন জমা (₹)</label><input type="number" min="0" step="0.01" value="0" id="paid" oninput="updateBillDue()"></div>
+   <div class="field"><label>এই বিলে বাকি</label><input id="remaining" value="0" readonly></div>
+   <div class="field"><label>পুরনো পাওনা সহ মোট বাকি</label><input id="totalRemaining" value="0" readonly></div>
+  </div>
+  <div class="form-actions">
+   <button class="btn" onclick="saveBill()">বিল সেভ করুন</button>
+   <button class="btn secondary" onclick="printCurrentBill()">PDF / প্রিন্ট</button>
+   <button class="btn secondary" onclick="shareCurrentBill()">WhatsApp শেয়ার</button>
+   <button class="btn secondary" onclick="startNewBill()">নতুন বিল</button>
+  </div>
+  <div class="notice">বিল সেভ হলে বিক্রি ও লাভের রিপোর্ট আপডেট হবে, স্টক থেকে সংরক্ষিত আইটেমের পরিমাণ কমবে এবং কাস্টমারের খাতায় ধার/জমা যুক্ত হবে। ম্যানুয়াল আইটেম স্টক কমাবে না।</div>
+ </div>
+ <div class="panel" style="margin-top:16px"><h3>সাম্প্রতিক সেভ করা বিল</h3><div class="table-wrap"><table><thead><tr><th>বিল নম্বর</th><th>তারিখ</th><th>কাস্টমার</th><th>মোট</th><th>বাকি</th><th>অ্যাকশন</th></tr></thead><tbody id="savedBillRows"></tbody></table></div></div>
+</section>
+<section class="section" id="khata">
+ <div class="khata-mobile-head">
+  <div class="khata-brandline"><span style="font-size:25px">▣</span> Rahul Hardware <span style="font-size:18px">⌄</span></div>
+  <div class="khata-tabs"><button id="khataCustomerTab" class="active" onclick="setKhataTab('customer')">গ্রাহক</button><button id="khataSupplierTab" onclick="setKhataTab('supplier')">সরবরাহকারী</button></div>
+ </div>
+ <div class="khata-overview"><div class="khata-overview-values"><div><small>আপনি দেবেন</small><b id="khataTotalAdvance" style="color:#13805d">₹ 0</b></div><div><small>আপনি পাবেন</small><b id="khataTotalDue" style="color:#a21e36">₹ 0</b></div></div><button class="khata-report" onclick="showPage('reports')">▣ রিপোর্ট দেখুন</button></div>
+ <div class="khata-tools"><div class="khata-searchbox"><span style="font-size:22px;color:#1769aa">⌕</span><input id="partySearch" placeholder="গ্রাহক অনুসন্ধান করুন" oninput="renderKhata()"></div><button class="khata-filter" onclick="toggleKhataFilter()">▽ ফিল্টার</button></div>
+ <div id="khataFilterPanel" class="panel" style="display:none;margin-bottom:10px;padding:12px"><label style="font-size:11px;color:#718096">হিসাবের ধরন</label><select id="khataBalanceFilter" onchange="renderKhata()" style="width:100%;margin-top:6px"><option value="all">সব গ্রাহক</option><option value="due">পাওনা আছে</option><option value="advance">অগ্রিম জমা আছে</option><option value="zero">হিসাব সমান</option></select></div>
+ <div id="khataPartyList" class="khata-party-list"></div>
+ <div style="display:flex;justify-content:flex-end;margin-top:13px"><button class="btn" onclick="openNewParty()">＋ গ্রাহক যোগ করুন</button></div>
+ <div class="notice">গ্রাহকের নাম চাপলে তার সম্পূর্ণ লেনদেনের হিস্টরি ও প্রোফাইল সেটিংস খুলবে।</div>
+</section>
+<section class="section" id="reports">
+ <div class="toolbar"><h1>রিপোর্ট ও হিসাব</h1><button class="btn secondary" onclick="renderReports()">রিফ্রেশ</button></div>
+ <div class="dashboard-filter">
+  <div class="field"><label>রিপোর্টের সময়</label><select id="reportRange" onchange="renderReports()"><option value="today">আজ</option><option value="yesterday">গতকাল</option><option value="7">৭ দিন</option><option value="30">৩০ দিন</option><option value="180">৬ মাস</option><option value="365">১ বছর</option><option value="3650">১০ বছর</option><option value="custom">তারিখ বেছে নিন</option></select></div>
+  <div class="field" id="reportFromWrap" style="display:none"><label>শুরু</label><input id="reportFrom" type="date" onchange="renderReports()"></div>
+  <div class="field" id="reportToWrap" style="display:none"><label>শেষ</label><input id="reportTo" type="date" onchange="renderReports()"></div>
+ </div>
+ <div class="stats">
+  <div class="card"><div class="stat-label">মোট বিক্রি</div><div class="stat-value" id="reportSales">₹ 0</div></div>
+  <div class="card"><div class="stat-label">আনুমানিক গ্রস লাভ</div><div class="stat-value" id="reportProfit">₹ 0</div></div>
+  <div class="card"><div class="stat-label">জমা টাকা</div><div class="stat-value" id="reportPaid">₹ 0</div></div>
+  <div class="card"><div class="stat-label">বিল সংখ্যা</div><div class="stat-value" id="reportCount">0</div></div>
+ </div>
+ <div class="panel"><h3>বিলের বিস্তারিত</h3><div class="table-wrap"><table><thead><tr><th>তারিখ</th><th>বিল</th><th>কাস্টমার</th><th>বিক্রি</th><th>লাভ</th><th>জমা</th><th>বাকি</th></tr></thead><tbody id="reportRows"></tbody></table></div></div>
+ <div class="panel" style="margin-top:16px"><h3>নির্বাচিত সময়ের খাতা লেনদেন</h3><div class="table-wrap"><table><thead><tr><th>তারিখ ও সময়</th><th>কাস্টমার</th><th>ধার / জমা</th><th>টাকা</th><th>বিবরণ</th></tr></thead><tbody id="ledgerReportRows"></tbody></table></div></div>
+ <div class="notice">লাভ = বিক্রয় মূল্য − সংরক্ষিত আইটেমের ক্রয়মূল্য। ম্যানুয়াল আইটেমের ক্রয়মূল্য না দিলে ওই আইটেমের লাভ শূন্য ধরে দেখানো হবে। দোকানের খরচের মডিউল এখনো যুক্ত করা হয়নি।</div>
+</section>
+<section class="section" id="backup">
+ <div class="toolbar"><h1>ব্যাকআপ ও ডেটা সুরক্ষা</h1></div>
+ <div class="panel" style="max-width:760px"><h3>ডেটা ব্যাকআপ / Restore</h3>
+  <p class="muted" style="font-size:12px;line-height:1.8">এই ডেমোর আইটেম, বিল ও খাতার ডেটা এই ব্রাউজারে সেভ থাকে। নিয়মিত JSON ব্যাকআপ ডাউনলোড করে নিরাপদে রাখুন।</p>
+  <div class="form-actions"><button class="btn" onclick="exportBackup()">ব্যাকআপ ডাউনলোড</button><label class="btn secondary" for="restoreFile" style="cursor:pointer">ব্যাকআপ Restore</label><input id="restoreFile" type="file" accept="application/json,.json" style="display:none" onchange="importBackup(event)"></div>
+  <div class="notice">সতর্কতা: এটি লোকাল ডেমো। অন্য ফোন/কম্পিউটারে স্বয়ংক্রিয় সিঙ্ক, অনলাইন লগইন/PIN সুরক্ষা ও ক্লাউড ব্যাকআপ নেই। Restore করলে এই ব্রাউজারের বর্তমান ডেটা প্রতিস্থাপিত হবে।</div>
+ </div>
+</section>
+<section class="section" id="sandcalc">
+ <div class="toolbar"><h1>বালির হিসাব</h1><span class="tag">Sand Calculator</span></div>
+ <div class="sand-wrap">
+  <div class="sand-card"><h3>চারটি তৈরি মাপ</h3><div class="sand-presets" id="sandPresets"></div></div>
+  <div class="sand-card"><h3>বালির পরিমাণ</h3><div class="sand-grid">
+   <div><label for="sandFineQty">সরু বালি (CFT)</label><input id="sandFineQty" type="number" min="0" step="0.01" value="10.5"></div>
+   <div><label for="sandCoarseQty">মোটা বালি (CFT)</label><input id="sandCoarseQty" type="number" min="0" step="0.01" value="54.5"></div>
+   <div><label for="sandTruck">গাড়ি ভাড়া (₹)</label><input id="sandTruck" type="number" min="0" step="1" value="400"></div>
+   <div><label for="sandProfit">আমার লাভ (₹)</label><input id="sandProfit" type="number" min="0" step="1" value="200"></div>
+  </div><div class="sand-editor" style="margin-top:11px"><label for="sandGamlaCount">সরু বালির গামলা সংখ্যা</label><input id="sandGamlaCount" type="number" min="0" step="0.01" value="15"></div>
+  <div class="sand-summary" style="margin-top:10px"><div class="sand-line"><span>এই অর্ডারে মোট বালি</span><b id="sandVolume">65 CFT</b></div><div class="sand-line"><span>গাড়িতে বাকি জায়গা</span><b id="sandRemaining">0 CFT</b></div><div id="sandWarning" class="sand-warning sand-hidden"></div></div></div>
+  <div class="sand-card"><h3>মোট হিসাব</h3><div class="sand-line"><span>সরু বালির মোট দাম</span><b id="sandFineTotal">₹567</b></div><div class="sand-line"><span>মোটা বালির মোট দাম</span><b id="sandCoarseTotal">₹4,414.50</b></div><div class="sand-line"><span>গাড়ি ভাড়া</span><b id="sandTruckTotal">₹400</b></div><div class="sand-line"><span>আমার লাভ</span><b id="sandProfitTotal">₹200</b></div><div class="sand-grand" style="margin-top:10px">কাস্টমারকে মোট বলবে<strong id="sandGrandTotal">₹5,581.50</strong><span class="sand-muted" id="sandQuantityTotal">মোট 65 CFT বালি</span></div><div class="sand-actions"><button class="btn" id="sandCopy">হিসাব কপি</button><button class="btn secondary" id="sandReset">নতুন হিসাব</button><button class="btn secondary" id="sandOpenSettings">⚙ সেটিংস</button></div><div class="sand-muted" id="sandToast" aria-live="polite" style="margin-top:8px"></div></div>
+  <div class="sand-card sand-hidden" id="sandAdmin"><div class="toolbar"><h3>অ্যাডমিন সেটিংস</h3><button class="btn secondary" id="sandCloseSettings">← ফিরে যান</button></div><h3>বালির দাম (শুধু অ্যাডমিন)</h3><div class="sand-grid"><div><label>সরু বালি প্রতি CFT (₹)</label><input id="sandFineRate" type="number" min="0" step="0.01"></div><div><label>মোটা বালি প্রতি CFT (₹)</label><input id="sandCoarseRate" type="number" min="0" step="0.01"></div><div><label>ট্রাক্টরের ধারণক্ষমতা (CFT)</label><input id="sandCapacity" type="number" min="0" step="0.1"></div><div><label>১ গামলার মাপ (CFT)</label><input id="sandGamlaSize" type="number" min="0.01" step="0.01"></div></div><hr><h3>চারটি মাপ কাস্টমাইজ</h3><div id="sandEditors"></div><div class="sand-actions"><button class="btn" id="sandSave">সব সেটিংস সেভ</button><button class="btn secondary" id="sandRestore">ডিফল্ট ফিরিয়ে আনুন</button></div><div class="sand-muted" id="sandSaveToast" style="margin-top:8px"></div></div>
+ </div>
+</section>
+</div></main></div>
+<div class="modal-backdrop" id="itemModal" onclick="if(event.target===this)closeItemModal()">
+ <div class="edit-modal">
+  <div class="modal-head"><h3 id="itemModalTitle">নতুন আইটেম যোগ করুন</h3><button class="modal-close" onclick="closeItemModal()" aria-label="বন্ধ করুন">×</button></div>
+  <div class="item-photo-row"><div class="item-photo-preview" id="itemPhotoPreview">📦</div><div><b style="font-size:13px">আইটেমের ছবি</b><div class="muted" style="font-size:11px;margin:4px 0 8px">গ্যালারি থেকে ছবি বেছে নিন</div><input id="itemPhotoInput" type="file" accept="image/*" onchange="previewItemPhoto(event)" style="max-width:220px"></div></div>
+  <div class="item-modal-grid">
+   <div class="field"><label>আইটেমের নাম *</label><input id="editItemName" placeholder="যেমন পেরেক"></div>
+   <div class="field"><label>আইটেম কোড</label><input id="editItemCode" placeholder="যেমন NAI-01"></div>
+   <div class="field"><label>ইউনিট</label><select id="editItemUnit" onchange="toggleCustomUnit()"><option>KG</option><option>GRAM</option><option>CFT</option><option>TON</option><option>PCS</option><option>BAG</option><option>TRACTOR</option><option value="CUSTOM">নিজস্ব ইউনিট</option></select></div>
+   <div class="field" id="customUnitWrap" style="display:none"><label>নিজস্ব ইউনিটের নাম</label><input id="editCustomUnit" placeholder="যেমন BUNDLE"></div>
+   <div class="field"><label>বিক্রয় মূল্য (₹) *</label><input id="editItemSale" type="number" min="0" step="0.01" placeholder="0"></div>
+   <div class="field"><label>ক্রয় মূল্য (₹)</label><input id="editItemPurchase" type="number" min="0" step="0.01" placeholder="0"></div>
+   <div class="field"><label>বর্তমান স্টক</label><input id="editItemStock" type="number" min="0" step="0.001" placeholder="0"></div>
+   <div class="field"><label>প্রতি ইউনিট লাভ</label><input id="editItemProfit" readonly placeholder="অটোমেটিক হিসাব" style="background:#f1f7fc;color:#12815c;font-weight:700"></div>
+  </div>
+  <div class="form-actions" style="justify-content:space-between;align-items:center"><button class="btn secondary" id="deleteItemBtn" onclick="deleteCurrentItem()" style="display:none;background:#fff0f0;color:#c43d48">আইটেম মুছুন</button><div style="display:flex;gap:8px;margin-left:auto"><button class="btn secondary" onclick="closeItemModal()">বাতিল</button><button class="btn" onclick="saveItemFromModal()">সেভ করুন</button></div></div>
+ </div>
+</div>
+<div class="modal-backdrop" id="partyModal" onclick="if(event.target===this)closePartyModal()">
+ <div class="edit-modal">
+  <div class="modal-head"><h3>নতুন পার্টি তৈরি করুন</h3><button class="modal-close" onclick="closePartyModal()">×</button></div>
+  <div class="field"><label>পার্টির নাম *</label><input id="newPartyName" placeholder="যেমন রাজা" oninput="showNameMatches()"></div>
+  <div id="newPartyMatches" class="party-suggestions" style="margin:8px 0 12px"></div>
+  <div class="field"><label>মোবাইল নম্বর</label><input id="newPartyPhone" placeholder="মোবাইল নম্বর (ঐচ্ছিক)"></div>
+  <div class="field" style="margin-top:12px"><label>ঠিকানা (ঐচ্ছিক)</label><input id="newPartyAddress" placeholder="গ্রাম / ঠিকানা"></div>
+  <div class="notice">একই নামের পুরোনো পার্টি থাকলে উপরের তালিকা থেকে তার প্রোফাইল খুলুন। নতুন ব্যক্তি হলে আলাদা নতুন প্রোফাইল তৈরি করুন।</div>
+  <div class="form-actions" style="justify-content:flex-end"><button class="btn secondary" onclick="closePartyModal()">বাতিল</button><button class="btn" onclick="createParty()">নতুন খাতা তৈরি করুন</button></div>
+ </div>
+</div>
+<div class="profile-fullscreen" id="profileModal"><div class="edit-modal"><div id="profileContent"></div></div></div>
+<script>
+// Storage fallback keeps the demo usable in restricted preview/file contexts.
+const appStorage=(()=>{try{const s=window.localStorage;const k='__rahul_hardware_storage_test__';s.setItem(k,'1');s.removeItem(k);return s;}catch(e){const m=new Map();return {getItem:k=>m.has(k)?m.get(k):null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k),clear:()=>m.clear()};}})();
+const pages={dashboard:'ড্যাশবোর্ড',calculator:'ক্যালকুলেটর',items:'আইটেম / স্টক',billing:'বিলিং',khata:'খাতা বুক',reports:'রিপোর্ট',backup:'ব্যাকআপ',sandcalc:'বালির হিসাব'};
+function toggleSettingsMenu(e){e.stopPropagation();const m=document.getElementById('settingsMenu');const opening=!m.classList.contains('open');m.classList.toggle('open',opening);document.getElementById('settingsBtn').setAttribute('aria-expanded',String(opening));}
+function closeSettingsMenu(){const m=document.getElementById('settingsMenu');if(m)m.classList.remove('open');const b=document.getElementById('settingsBtn');if(b)b.setAttribute('aria-expanded','false');}
+document.addEventListener('click',e=>{const m=document.getElementById('settingsMenu'),b=document.getElementById('settingsBtn');if(m&&!m.contains(e.target)&&!b?.contains(e.target))closeSettingsMenu();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSettingsMenu();});
+function showPage(p){document.querySelectorAll('.section').forEach(x=>x.classList.remove('show'));document.getElementById(p).classList.add('show');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));document.getElementById('pageTitle').textContent=pages[p];}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function fmtQty(v){return Number(v.toFixed(4)).toLocaleString('en-IN',{maximumFractionDigits:4});}
+let calcPricePerGram=0;
+function calcUnitText(){const selected=document.getElementById('calcItem').value;if(selected!==''&&items[Number(selected)]){const u=String(items[Number(selected)][2]).toUpperCase();if(u!=='KG'&&u!=='GRAM')return u;}return Number(document.getElementById('qtyUnit').value)===1000?'KG':'GRAM';}
+function calcBoth(source){
+ const price=Number(document.getElementById('kgPrice').value)||0;
+ const unit=Number(document.getElementById('qtyUnit').value)||1000;
+ const qtyEl=document.getElementById('grams'), moneyEl=document.getElementById('money');
+ const result=document.getElementById('calcResult'), note=document.getElementById('moneyResult');
+ if(source==='qty' || source==='price' || source==='unit'){
+   const q=Number(qtyEl.value);
+   if(qtyEl.value!=='' && q>=0 && price>0){
+     const amount=q*unit*calcPricePerGram;
+     moneyEl.value=Number(amount.toFixed(2));
+     result.textContent='মোট দাম: ₹ '+amount.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
+     note.textContent='পরিমাণ: '+q+' '+calcUnitText()+'  |  একক দর: ₹ '+price.toLocaleString('en-IN')+' / '+calcUnitText();
+   } else if(source==='price'){
+     moneyEl.value='';result.textContent='এবার পরিমাণ অথবা টাকার অঙ্ক লিখুন';note.textContent='দাম ও পরিমাণ লিখলেই অটো হিসাব হবে।';
+   }
+ } else if(source==='money'){
+   const amount=Number(moneyEl.value);
+   if(moneyEl.value!=='' && amount>=0 && calcPricePerGram>0){
+     const q=amount/(calcPricePerGram*unit);
+     qtyEl.value=Number.isFinite(q)?Number(q.toFixed(3)):'';
+     result.textContent='এই টাকায় পরিমাণ: '+Number(q.toFixed(3)).toLocaleString('en-IN')+' '+calcUnitText();
+     note.textContent='মোট টাকা: ₹ '+amount.toLocaleString('en-IN')+'  |  একক দর: ₹ '+price.toLocaleString('en-IN');
+   } else if(moneyEl.value===''){
+     qtyEl.value='';result.textContent='টাকার অঙ্ক লিখুন';
+   }
+ }
+}
+let calcCart=[];
+function calcCartSum(){return calcCart.reduce((sum,x)=>sum+x.qty*x.rate,0);}
+function renderCalcCart(){
+ const rows=document.getElementById('calcCartRows');if(!rows)return;
+ rows.innerHTML=calcCart.map((x,i)=>`<tr><td><b>${escapeItemText(x.name)}</b></td><td>${fmtQty(x.qty)} ${escapeItemText(x.unit)}</td><td>₹${Number(x.rate).toLocaleString('en-IN',{maximumFractionDigits:2})}</td><td><b>₹${(x.qty*x.rate).toLocaleString('en-IN',{maximumFractionDigits:2})}</b></td><td><button class="table-action" onclick="removeCalcCartItem(${i})">✕</button></td></tr>`).join('')||'<tr><td colspan="5" class="muted">এখনো কোনো আইটেম যোগ করা হয়নি।</td></tr>';
+ document.getElementById('calcCartCount').textContent=calcCart.length.toLocaleString('bn-IN')+'টি আইটেম';
+ document.getElementById('calcCartTotal').textContent='₹ '+calcCartSum().toLocaleString('en-IN',{maximumFractionDigits:2});
+}
+function addCalcCartItem(){
+ const idx=document.getElementById('calcItem').value, name=(document.getElementById('calcManualName').value||'').trim(), qty=Number(document.getElementById('grams').value), amount=Number(document.getElementById('money').value), unit=calcUnitText();
+ if(!Number.isFinite(qty)||qty<=0||!Number.isFinite(amount)||amount<0){alert('আগে আইটেমের সঠিক পরিমাণ ও মোট দাম হিসাব করুন।');return;}
+ let item=idx!==''?items[Number(idx)]:null;let itemName=item?item[0]:name;
+ if(!itemName){alert('আইটেম বেছে নিন অথবা আইটেমের নাম লিখুন।');return;}
+ const rate=amount/qty;
+ calcCart.push({name:itemName,unit,qty,rate,saved:!!item,itemCode:item?item[1]:'',purchase:item?Number(item[4]||0):rate});
+ renderCalcCart();
+ document.getElementById('calcItem').value='';document.getElementById('calcManualName').value='';document.getElementById('kgPrice').value='';document.getElementById('grams').value='';document.getElementById('money').value='';selectCalcItem();
+}
+function removeCalcCartItem(i){calcCart.splice(i,1);renderCalcCart();}
+function clearCalcCart(){if(!calcCart.length)return;if(!confirm('বিলের তালিকার সব আইটেম মুছে দেবেন?'))return;calcCart=[];renderCalcCart();}
+function calcCartShareText(){return 'রাহুল হার্ডওয়্যার\n'+calcCart.map((x,i)=>`${i+1}. ${x.name} — ${fmtQty(x.qty)} ${x.unit} × ₹${x.rate.toFixed(2)} = ₹${(x.qty*x.rate).toFixed(2)}`).join('\n')+`\n\nসর্বমোট: ₹${calcCartSum().toFixed(2)}\nধন্যবাদ।`;}
+function shareCalcCart(){if(!calcCart.length){alert('আগে বিলের তালিকায় আইটেম অ্যাড করুন।');return;}window.open('https://wa.me/?text='+encodeURIComponent(calcCartShareText()),'_blank');}
+function createBillFromCalc(){if(!calcCart.length){alert('আগে বিলের তালিকায় আইটেম অ্যাড করুন।');return;}bill=calcCart.map(x=>({...x}));showPage('billing');drawBill();document.getElementById('custName').focus();alert('ক্যালকুলেটরের সব আইটেম বিলিংয়ে যোগ হয়েছে। কাস্টমারের নাম দিয়ে বিল সেভ করুন।');}
+const starterItems=[['বালি','SND-01','CFT',120,95,250,''],['সিমেন্ট','CEM-01','BAG',420,385,85,''],['পাথর','STN-01','TON',1850,1600,12,''],['পাইপ','PIP-01','PCS',180,140,45,''],['তারপলিন','TRP-01','KG',95,72,30,''],['পেরেক','NAI-01','KG',80,65,40,'']];
+let items=(()=>{try{let saved=JSON.parse(appStorage.getItem('rahulHardwareDemoItems'));return Array.isArray(saved)?saved:starterItems.map(x=>x.slice());}catch(e){return starterItems.map(x=>x.slice());}})();
+items=items.map(x=>{while(x.length<7)x.push('');return x;});
+let editingItemIndex=-1,workingPhoto='';
+function persistItems(){try{appStorage.setItem('rahulHardwareDemoItems',JSON.stringify(items));}catch(e){alert('ছবির ফাইল বড় হওয়ায় সেভ করা যায়নি। ছোট ছবি ব্যবহার করুন।');}}
+function refreshCalcItems(){
+ const sel=document.getElementById('calcItem'),keep=sel.value;
+ const available=items.map((x,i)=>({x,i}));
+ sel.innerHTML='<option value="">ম্যানুয়ালি দাম লিখব</option>'+available.map(({x,i})=>`<option value="${i}">${escapeItemText(x[0])} — ₹${Number(x[3]).toLocaleString('en-IN')}/${escapeItemText(x[2])}</option>`).join('');
+ if(keep!==''&&available.some(o=>String(o.i)===keep))sel.value=keep;
+}
+function selectCalcItem(){
+ const i=document.getElementById('calcItem').value,priceEl=document.getElementById('kgPrice'),unitEl=document.getElementById('qtyUnit');
+ const nameEl=document.getElementById('calcManualName'),result=document.getElementById('calcResult'),note=document.getElementById('moneyResult');
+ if(i===''){
+  calcPricePerGram=(Number(priceEl.value)||0)/1000;
+  unitEl.innerHTML='<option value="1000">কেজি (KG)</option><option value="1">গ্রাম (GRAM)</option>';unitEl.value='1000';
+  document.getElementById('calcPriceLabel').textContent='বিক্রয় মূল্য (প্রতি KG) ₹';
+  document.getElementById('grams').value='';document.getElementById('money').value='';
+  result.textContent='ম্যানুয়ালি দাম লিখুন';note.textContent='এবার KG বা GRAM-এ পরিমাণ অথবা টাকার অঙ্ক লিখুন।';return;
+ }
+ const item=items[Number(i)],basis=String(item[2]).toUpperCase();
+ priceEl.value=item[3];nameEl.value=item[0];
+ if(basis==='KG'||basis==='GRAM'){
+  calcPricePerGram=basis==='GRAM'?Number(item[3]):Number(item[3])/1000;
+  unitEl.innerHTML='<option value="1000">কেজি (KG)</option><option value="1">গ্রাম (GRAM)</option>';unitEl.value=basis==='GRAM'?'1':'1000';
+ }else{
+  calcPricePerGram=Number(item[3]);
+  unitEl.innerHTML=`<option value="1">${escapeItemText(basis)}</option>`;unitEl.value='1';
+ }
+ document.getElementById('calcPriceLabel').textContent='বিক্রয় মূল্য (প্রতি '+basis+') ₹';
+ document.getElementById('money').value='';document.getElementById('grams').value='';
+ result.textContent=item[0]+'-এর বিক্রয় মূল্য ₹'+Number(item[3]).toLocaleString('en-IN')+' / '+basis;
+ note.textContent='এবার '+basis+'-এ পরিমাণ অথবা টাকার অঙ্ক লিখুন।';
+}
+function calcManualPriceChanged(){const price=Number(document.getElementById('kgPrice').value)||0,selected=document.getElementById('calcItem').value; if(selected!==''&&items[Number(selected)]){const basis=String(items[Number(selected)][2]).toUpperCase();calcPricePerGram=(basis==='KG'?price/1000:price);}else{calcPricePerGram=price/1000;}calcBoth('price');}
+function renderItems(){let q=(itemSearch.value||'').toLowerCase();itemRows.innerHTML=items.map((x,i)=>({x,i})).filter(o=>(o.x[0]+' '+o.x[1]).toLowerCase().includes(q)).map(({x,i})=>`<tr><td>${x[6]?`<img class="item-thumb" src="${x[6]}" alt="">`:'<span class="item-thumb" style="display:inline-grid;place-items:center">📦</span>'}<b>${escapeItemText(x[0])}</b><br><small class="muted">${escapeItemText(x[1])}</small></td><td>${escapeItemText(x[2])}</td><td>₹${Number(x[3]).toLocaleString('en-IN')}</td><td>₹${Number(x[4]).toLocaleString('en-IN')}</td><td>${Number(x[5]).toLocaleString('en-IN')}</td><td class="positive">₹${(Number(x[3])-Number(x[4])).toLocaleString('en-IN')}</td><td><button class="table-action" onclick="editItem(${i})">✎ এডিট</button></td></tr>`).join('')||'<tr><td colspan="7" class="muted">কোনো আইটেম পাওয়া যায়নি</td></tr>';refreshCalcItems();if(document.getElementById('billItem')){const sel=document.getElementById('billItem'),keep=sel.value;sel.innerHTML='<option value="">— আইটেম বেছে নিন —</option>'+items.map((x,i)=>`<option value="${i}">${escapeItemText(x[0])} · ${x[2]} · ₹${Number(x[3]).toLocaleString('en-IN')}</option>`).join('');if(keep!==''&&items[Number(keep)])sel.value=keep;}}
+function escapeItemText(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function openItemModal(index=-1){editingItemIndex=index;workingPhoto=index>=0?(items[index][6]||''):'';let x=index>=0?items[index]:['','','PCS',0,0,0,''];document.getElementById('itemModalTitle').textContent=index>=0?'আইটেম কাস্টমাইজ / পরিবর্তন':'নতুন আইটেম যোগ করুন';editItemName.value=x[0];editItemCode.value=x[1];editItemSale.value=x[3];editItemPurchase.value=x[4];editItemStock.value=x[5];editItemUnit.value=['KG','GRAM','CFT','TON','PCS','BAG','TRACTOR'].includes(x[2])?x[2]:'CUSTOM';editCustomUnit.value=editItemUnit.value==='CUSTOM'?x[2]:'';toggleCustomUnit();editItemProfit.value=(Number(x[3])-Number(x[4])).toFixed(2);itemPhotoInput.value='';itemPhotoPreview.innerHTML=workingPhoto?`<img src="${workingPhoto}" alt="আইটেম">`:'📦';deleteItemBtn.style.display=index>=0?'inline-block':'none';itemModal.classList.add('open');}
+function addItem(){openItemModal(-1);}
+function editItem(i){openItemModal(i);}
+function closeItemModal(){itemModal.classList.remove('open');}
+function toggleCustomUnit(){customUnitWrap.style.display=editItemUnit.value==='CUSTOM'?'block':'none';}
+function previewItemPhoto(event){let file=event.target.files&&event.target.files[0];if(!file)return;if(!file.type.startsWith('image/')){alert('একটি ছবি বেছে নিন।');return;}if(file.size>2*1024*1024){alert('অনুগ্রহ করে ২ MB-এর কম ছবি বেছে নিন।');event.target.value='';return;}let reader=new FileReader();reader.onload=()=>{workingPhoto=reader.result;itemPhotoPreview.innerHTML=`<img src="${workingPhoto}" alt="প্রিভিউ">`;};reader.readAsDataURL(file);}
+[editItemSale,editItemPurchase].forEach(el=>el.addEventListener('input',()=>editItemProfit.value=((+editItemSale.value||0)-(+editItemPurchase.value||0)).toFixed(2)));
+function saveItemFromModal(){let name=editItemName.value.trim(),code=editItemCode.value.trim(),unit=editItemUnit.value==='CUSTOM'?editCustomUnit.value.trim():editItemUnit.value,sale=Number(editItemSale.value),purchase=Number(editItemPurchase.value||0),stock=Number(editItemStock.value||0);if(!name){alert('আইটেমের নাম লিখুন।');editItemName.focus();return;}if(!Number.isFinite(sale)||sale<0||!Number.isFinite(purchase)||purchase<0||!Number.isFinite(stock)||stock<0){alert('দাম ও স্টকের সঠিক সংখ্যা লিখুন।');return;}if(!unit){alert('ইউনিট লিখুন।');return;}if(!code)code='RH-'+String(Date.now()).slice(-6);let record=[name,code,unit,sale,purchase,stock,workingPhoto];if(editingItemIndex>=0)items[editingItemIndex]=record;else items.push(record);persistItems();renderItems();closeItemModal();}
+function deleteCurrentItem(){if(editingItemIndex<0)return;if(!confirm('এই আইটেমটি তালিকা থেকে মুছে দেবেন?'))return;items.splice(editingItemIndex,1);persistItems();renderItems();closeItemModal();}
+
+renderItems();
+refreshCalcItems();
+renderCalcCart();
+const billsKey='rahulHardwareDemoBills';
+let bills=(()=>{try{const x=JSON.parse(appStorage.getItem(billsKey));return Array.isArray(x)?x:[];}catch(e){return [];}})();
+function persistBills(){appStorage.setItem(billsKey,JSON.stringify(bills));}
+let bill=[],billSeq=Number(appStorage.getItem('rahulHardwareBillSeq')||0),lastSavedBill=null;
+function nextBillNumber(){billSeq++;appStorage.setItem('rahulHardwareBillSeq',String(billSeq));return 'RH-'+new Date().getFullYear()+'-'+String(billSeq).padStart(5,'0');}
+function initBilling(){
+ const sel=document.getElementById('billItem');
+ sel.innerHTML='<option value="">— আইটেম বেছে নিন —</option>'+items.map((x,i)=>`<option value="${i}">${escapeItemText(x[0])} · ${x[2]} · ₹${Number(x[3]).toLocaleString('en-IN')}</option>`).join('');
+ document.getElementById('billNumber').value=nextBillNumber();
+ document.getElementById('billDate').value=new Date().toISOString().slice(0,10);
+ document.getElementById('customerOptions').innerHTML=parties.map(p=>`<option value="${escapeItemText(p.name)}"></option>`).join('');
+ drawBill();renderSavedBills();
+}
+function billPickItem(){
+ const v=document.getElementById('billItem').value;
+ if(v===''){document.getElementById('billSelectedInfo').value='ম্যানুয়াল আইটেম';return;}
+ const x=items[Number(v)];
+ document.getElementById('billRate').value=x[3];document.getElementById('billUnit').value=x[2];
+ document.getElementById('manualBillName').value=x[0];
+ document.getElementById('billSelectedInfo').value='স্টক: '+x[5]+' '+x[2]+' · ক্রয়: ₹'+x[4];
+}
+function currentBillTotal(){return bill.reduce((a,x)=>a+x.qty*x.rate,0);}
+function drawBill(){
+ const rows=document.getElementById('billRows');
+ rows.innerHTML=bill.map((x,i)=>`<tr><td><b>${escapeItemText(x.name)}</b><br><small class="muted">${x.saved?'স্টক আইটেম':'ম্যানুয়াল আইটেম'}</small></td><td>${x.qty} ${escapeItemText(x.unit)}</td><td>₹${Number(x.rate).toLocaleString('en-IN')}</td><td>₹${(x.qty*x.rate).toLocaleString('en-IN')}</td><td><button class="table-action" onclick="removeBillLine(${i})">✕ মুছুন</button></td></tr>`).join('')||'<tr><td colspan="5" class="muted">এখনো কোনো আইটেম যোগ করা হয়নি।</td></tr>';
+ document.getElementById('billTotal').textContent='₹ '+currentBillTotal().toLocaleString('en-IN',{maximumFractionDigits:2});
+ updateBillDue();
+}
+function addBillLine(){
+ const idx=document.getElementById('billItem').value,manualName=document.getElementById('manualBillName').value.trim();
+ const qty=Number(document.getElementById('billQty').value),rate=Number(document.getElementById('billRate').value);
+ if(!Number.isFinite(qty)||qty<=0||!Number.isFinite(rate)||rate<0){alert('সঠিক পরিমাণ ও বিক্রয় দর লিখুন।');return;}
+ let line;
+ if(idx!==''){
+  const x=items[Number(idx)];if(!x){alert('আইটেমটি পাওয়া যায়নি।');return;}
+  const unit=document.getElementById('billUnit').value;
+  if(unit!==x[2]){alert('স্টক আইটেমের ইউনিট পরিবর্তন করা যাবে না।');return;}
+  if(qty>Number(x[5])){if(!confirm('বর্তমান স্টকের চেয়ে বেশি পরিমাণ। তবুও বিল যোগ করবেন?'))return;}
+  line={name:x[0],unit:x[2],qty,rate,saved:true,itemCode:x[1],purchase:Number(x[4]),itemIndex:Number(idx)};
+ }else{
+  if(!manualName){alert('ম্যানুয়াল আইটেমের নাম লিখুন অথবা তালিকা থেকে আইটেম বেছে নিন।');return;}
+  line={name:manualName,unit:document.getElementById('billUnit').value,qty,rate,saved:false,purchase:rate};
+ }
+ bill.push(line);document.getElementById('billQty').value='';drawBill();
+}
+function removeBillLine(i){bill.splice(i,1);drawBill();}
+function resetBill(){if(bill.length&&!confirm('বিলের সব আইটেম মুছে দেবেন?'))return;bill=[];drawBill();}
+function findBillingParty(create=false){
+ const name=document.getElementById('custName').value.trim(),phone=document.getElementById('custPhone').value.trim();
+ if(!name)return null;
+ let p=parties.find(x=>phone&&x.phone===phone)||parties.find(x=>x.name.toLowerCase()===name.toLowerCase()&&(!phone||!x.phone||x.phone===phone));
+ if(!p&&create){p={id:'party-'+Date.now(),name,phone,address:'',transactions:[]};parties.unshift(p);}
+ return p;
+}
+function refreshCustomerDue(){
+ const p=findBillingParty(false),balance=p?partyBalance(p):0;
+ document.getElementById('oldDue').value=moneyFmt(balance);
+}
+function updateBillDue(){
+ const total=currentBillTotal(),paid=Math.max(0,Number(document.getElementById('paid')?.value)||0),old=(()=>{const p=findBillingParty(false);return p?partyBalance(p):0;})();
+ const newDue=Math.max(0,total-paid),net=old+total-paid;
+ document.getElementById('remaining').value=moneyFmt(newDue);
+ document.getElementById('totalRemaining').value=moneyFmt(net);
+ if(document.getElementById('oldDue'))document.getElementById('oldDue').value=moneyFmt(old);
+}
+function saveBill(){
+ if(!bill.length){alert('বিলে অন্তত একটি আইটেম যোগ করুন।');return;}
+ const name=document.getElementById('custName').value.trim();if(!name){alert('কাস্টমারের নাম লিখুন।');return;}
+ const total=currentBillTotal(),paid=Number(document.getElementById('paid').value)||0;
+ if(paid<0){alert('জমার টাকা ঋণাত্মক হতে পারে না।');return;}
+ const p=findBillingParty(true),now=new Date(),date=document.getElementById('billDate').value||now.toISOString().slice(0,10);
+ const profit=bill.reduce((a,x)=>a+(x.rate-Number(x.purchase||0))*x.qty,0);
+ const record={id:'bill-'+Date.now(),number:document.getElementById('billNumber').value,date,at:now.toISOString(),customer:name,phone:document.getElementById('custPhone').value.trim(),lines:bill.map(x=>({...x})),total,paid,profit,partyId:p.id,due:Math.max(0,total-paid)};
+ p.transactions.push({type:'debt',amount:total,note:'বিল '+record.number,at:now.toISOString()});
+ if(paid>0)p.transactions.push({type:'deposit',amount:paid,note:'বিল '+record.number+'-এ জমা',at:now.toISOString()});
+ bill.forEach(line=>{if(line.saved){const ix=items.findIndex(x=>x[1]===line.itemCode);if(ix>=0)items[ix][5]=Math.max(0,Number(items[ix][5])-line.qty);}});
+ bills.unshift(record);persistBills();persistParties();persistItems();renderItems();renderKhata();renderReports();updateDashboardRange();renderSavedBills();
+ lastSavedBill=record;alert('বিল '+record.number+' সফলভাবে সেভ হয়েছে।');
+ startNewBill();
+}
+function startNewBill(){
+ bill=[];document.getElementById('custName').value='';document.getElementById('custPhone').value='';document.getElementById('paid').value='0';
+ document.getElementById('billItem').value='';document.getElementById('manualBillName').value='';document.getElementById('billQty').value='';document.getElementById('billRate').value='';document.getElementById('billSelectedInfo').value='';
+ document.getElementById('billNumber').value=nextBillNumber();document.getElementById('billDate').value=new Date().toISOString().slice(0,10);drawBill();
+}
+function renderSavedBills(){
+ const el=document.getElementById('savedBillRows');if(!el)return;
+ el.innerHTML=bills.slice(0,15).map(x=>`<tr><td>${escapeItemText(x.number)}</td><td>${escapeItemText(x.date)}</td><td>${escapeItemText(x.customer)}</td><td>${moneyFmt(x.total)}</td><td>${moneyFmt(x.due)}</td><td><button class="table-action" onclick="viewBill('${x.id}')">দেখুন</button></td></tr>`).join('')||'<tr><td colspan="6" class="muted">এখনো কোনো বিল সেভ হয়নি।</td></tr>';
+}
+function viewBill(id){const b=bills.find(x=>x.id===id);if(!b)return;lastSavedBill=b;printCurrentBill();}
+function billText(b){
+ return `রাহুল হার্ডওয়্যার\nজানকিনগর, পলাশী মনুমেন্ট রোড, নদীয়া – ৭৪১১৫৭\nযোগাযোগ: 9046036910\nবিল: ${b.number}\nতারিখ: ${b.date}\nকাস্টমার: ${b.customer}${b.phone?' ('+b.phone+')':''}\n\n`+
+ b.lines.map(x=>`${x.name} — ${x.qty} ${x.unit} × ₹${x.rate} = ₹${(x.qty*x.rate).toFixed(2)}`).join('\n')+
+ `\n\nমোট: ₹${b.total.toFixed(2)}\nজমা: ₹${b.paid.toFixed(2)}\nএই বিলে বাকি: ₹${b.due.toFixed(2)}\nধন্যবাদ।`;
+}
+function printCurrentBill(){
+ const b=bill.length?{number:document.getElementById('billNumber').value,date:document.getElementById('billDate').value,customer:document.getElementById('custName').value,phone:document.getElementById('custPhone').value,lines:bill,total:currentBillTotal(),paid:Number(document.getElementById('paid').value)||0,due:currentBillTotal()-(Number(document.getElementById('paid').value)||0)}:(lastSavedBill||{lines:[]});
+ if(!b.lines.length){alert('প্রথমে বিলের আইটেম যোগ করুন।');return;}
+ const w=window.open('','_blank');if(!w){alert('পপ-আপ ব্লক হয়েছে। ব্রাউজারে পপ-আপ অনুমতি দিন।');return;}
+ const rows=b.lines.map(x=>`<tr><td>${escapeItemText(x.name)}</td><td>${x.qty} ${escapeItemText(x.unit)}</td><td>₹${x.rate}</td><td>₹${(x.qty*x.rate).toFixed(2)}</td></tr>`).join('');
+ w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${b.number}</title><style>body{font-family:Arial,sans-serif;padding:28px;color:#222}h1{margin:0;color:#174d7b}small{color:#555}table{width:100%;border-collapse:collapse;margin-top:22px}td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}.tot{margin:20px 0 0 auto;width:260px;line-height:2}</style></head><body><h1>Rahul Hardware</h1><p>জানকিনগর, পলাশী মনুমেন্ট রোড, নদীয়া – ৭৪১১৫৭<br>যোগাযোগ: 9046036910</p><hr><p>বিল: ${b.number}<br>তারিখ: ${b.date}<br>কাস্টমার: ${escapeItemText(b.customer)} ${escapeItemText(b.phone||'')}</p><table><thead><tr><th>আইটেম</th><th>পরিমাণ</th><th>দর</th><th>মোট</th></tr></thead><tbody>${rows}</tbody></table><div class="tot"><b>মোট: ₹${b.total.toFixed(2)}<br>জমা: ₹${b.paid.toFixed(2)}<br>বাকি: ₹${b.due.toFixed(2)}</b></div><p style="margin-top:40px">ধন্যবাদ, আবার আসবেন।</p><script>window.onload=()=>window.print()<\/script></body></html>`);w.document.close();
+}
+function shareCurrentBill(){
+ const b=bill.length?{number:document.getElementById('billNumber').value,date:document.getElementById('billDate').value,customer:document.getElementById('custName').value,phone:document.getElementById('custPhone').value,lines:bill,total:currentBillTotal(),paid:Number(document.getElementById('paid').value)||0,due:currentBillTotal()-(Number(document.getElementById('paid').value)||0)}:(lastSavedBill||{lines:[]});
+ if(!b.lines.length){alert('প্রথমে বিলের আইটেম যোগ করুন।');return;}
+ const text=encodeURIComponent(billText(b)),phone=(b.phone||'').replace(/\D/g,'');
+ const url=phone?`https://wa.me/${phone.startsWith('91')?phone:'91'+phone}?text=${text}`:`https://wa.me/?text=${text}`;
+ window.open(url,'_blank');
+}
+
+
+const partyStoreKey='rahulHardwareDemoParties';
+function seedPartyData(){return [
+ {id:'party-raja-old',name:'রাজা',phone:'9876543210',address:'জানকিনগর',transactions:[
+  {type:'debt',amount:7000,note:'মাল নিয়েছে',at:'2026-11-06T11:15:00+05:30'},
+  {type:'deposit',amount:2000,note:'আংশিক টাকা জমা',at:'2026-11-07T16:20:00+05:30'}]},
+ {id:'party-rahim',name:'রহিম মিয়া',phone:'9876500021',address:'পলাশী',transactions:[
+  {type:'debt',amount:5000,note:'সিমেন্ট ও বালি',at:'2026-11-07T16:20:00+05:30'}]},
+ {id:'party-advance',name:'সালাম',phone:'9000000012',address:'জানকিনগর',transactions:[
+  {type:'deposit',amount:100000,note:'আগাম টাকা জমা — পরে মাল নেবে',at:'2026-11-07T12:30:00+05:30'}]}
+];}
+let parties=(()=>{try{let x=JSON.parse(appStorage.getItem(partyStoreKey));return Array.isArray(x)?x:seedPartyData();}catch(e){return seedPartyData();}})();
+function persistParties(){try{appStorage.setItem(partyStoreKey,JSON.stringify(parties));}catch(e){alert('খাতার ডেটা সেভ করা যায়নি।');}}
+function moneyFmt(n){return '₹ '+Number(n||0).toLocaleString('en-IN',{maximumFractionDigits:2});}
+function partyBalance(p){return p.transactions.reduce((sum,t)=>sum+(t.type==='debt'?Number(t.amount):-Number(t.amount)),0);}
+function lastPartyActivity(p){if(!p.transactions.length)return 'এখনও লেনদেন নেই';let t=p.transactions[p.transactions.length-1];return new Date(t.at).toLocaleString('bn-IN',{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'});}
+let khataTab='customer';
+function setKhataTab(tab){khataTab=tab;document.getElementById('khataCustomerTab').classList.toggle('active',tab==='customer');document.getElementById('khataSupplierTab').classList.toggle('active',tab==='supplier');document.getElementById('partySearch').placeholder=tab==='customer'?'গ্রাহক অনুসন্ধান করুন':'সরবরাহকারী অনুসন্ধান করুন';renderKhata();}
+function toggleKhataFilter(){let e=document.getElementById('khataFilterPanel');e.style.display=e.style.display==='none'?'block':'none';}
+function renderKhata(){let due=0,advance=0;parties.forEach(p=>{let b=partyBalance(p);if(b>0)due+=b;else advance+=Math.abs(b);});document.getElementById('khataTotalDue').textContent=moneyFmt(due);document.getElementById('khataTotalAdvance').textContent=moneyFmt(advance);let q=(document.getElementById('partySearch')?.value||'').trim().toLowerCase(),filter=document.getElementById('khataBalanceFilter')?.value||'all';let filtered=parties.filter(p=>((p.name+' '+(p.phone||'')).toLowerCase().includes(q))).filter(p=>{let b=partyBalance(p);return filter==='due'?b>0:filter==='advance'?b<0:filter==='zero'?b===0:true;});document.getElementById('khataPartyList').innerHTML=filtered.map(p=>{let b=partyBalance(p),amount=Math.abs(b),label=b>0?'মনে করিয়ে দিন ›':b<0?'অগ্রিম জমা':'হিসাব সমান';return `<button class="khata-party-card" onclick="openProfile('${p.id}')"><span class="khata-party-avatar">${safePartyText((p.name||'?').slice(0,2).toUpperCase())}</span><span class="khata-party-info"><b>${safePartyText(p.name)}</b><small>${lastPartyActivity(p)}</small></span><span class="khata-party-amount"><b class="${b<0?'advance':''}">${moneyFmt(amount)}</b>${b>0?`<small>${label}</small>`:b<0?'<small>আপনি দেবেন</small>':''}</span></button>`;}).join('')||'<div class="muted" style="padding:22px;text-align:center">কোনো গ্রাহক পাওয়া যায়নি।</div>';}
+
+function safePartyText(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function renderPartySuggestions(){let el=document.getElementById('partySuggestions');if(!el)return;let q=(document.getElementById('partySearch').value||'').trim().toLowerCase();if(!q){el.innerHTML='';return;}let matches=parties.filter(p=>(p.name+' '+(p.phone||'')).toLowerCase().includes(q)).slice(0,6);el.innerHTML=matches.map(p=>`<button class="party-suggestion" onclick="openProfile('${p.id}')"><span><b>${safePartyText(p.name)}</b><small>${safePartyText(p.phone||'মোবাইল নম্বর নেই')} · পুরোনো খাতা</small></span><b>${partyBalance(p)>0?moneyFmt(partyBalance(p))+' পাওনা':partyBalance(p)<0?moneyFmt(-partyBalance(p))+' অগ্রিম':'হিসাব সমান'}</b></button>`).join('')+(matches.length?'<div class="muted" style="font-size:10px;padding:3px 2px">পুরোনো পার্টি খুলতে নামের উপর ট্যাপ করুন।</div>':'<div class="muted" style="font-size:11px;padding:6px">এই নামে পুরোনো খাতা নেই। নতুন পার্টি যোগ করতে পারেন।</div>');}
+function openNewParty(){document.getElementById('newPartyName').value='';document.getElementById('newPartyPhone').value='';document.getElementById('newPartyAddress').value='';document.getElementById('newPartyMatches').innerHTML='';document.getElementById('partyModal').classList.add('open');}
+function closePartyModal(){document.getElementById('partyModal').classList.remove('open');}
+function showNameMatches(){let q=document.getElementById('newPartyName').value.trim().toLowerCase(),el=document.getElementById('newPartyMatches');if(!q){el.innerHTML='';return;}let m=parties.filter(p=>p.name.toLowerCase().includes(q)).slice(0,6);el.innerHTML=m.map(p=>`<button class="party-suggestion" onclick="closePartyModal();openProfile('${p.id}')"><span><b>${safePartyText(p.name)}</b><small>${safePartyText(p.phone||'মোবাইল নেই')} · আগের খাতা খুলুন</small></span><span class="pill">পুরোনো পার্টি</span></button>`).join('');}
+function createParty(){let name=document.getElementById('newPartyName').value.trim();if(!name){alert('পার্টির নাম লিখুন।');return;}let phone=document.getElementById('newPartyPhone').value.trim(),address=document.getElementById('newPartyAddress').value.trim();let p={id:'party-'+Date.now()+'-'+Math.random().toString(36).slice(2,6),name,phone,address,transactions:[]};parties.unshift(p);persistParties();closePartyModal();renderKhata();openProfile(p.id);}
+let activeProfileId=null;
+function openProfile(id){let p=parties.find(x=>x.id===id);if(!p)return;activeProfileId=id;renderProfile(p);document.getElementById('profileModal').classList.add('open');}
+function closeProfile(){document.getElementById('profileModal').classList.remove('open');activeProfileId=null;}
+function openProfileSettings(id){let p=parties.find(x=>x.id===id);if(!p)return;renderProfileSettings(p);}
+function backToProfile(){let p=parties.find(x=>x.id===activeProfileId);if(p)renderProfile(p);}
+function renderProfile(p){let b=partyBalance(p),due=Math.max(0,b),advance=Math.max(0,-b);let history=p.transactions.map((t,i)=>({t,i})).reverse().map(({t,i})=>`<div class="profile-history-card"><div class="history-meta">${new Date(t.at).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'2-digit'})} · ${new Date(t.at).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}<small>ব্যালেন্স ${moneyFmt(p.transactions.slice(0,i+1).reduce((a,x)=>a+(x.type==='debt'?Number(x.amount):-Number(x.amount)),0))}</small><div class="ledger-edit-actions"><button class="table-action" onclick="editLedgerEntry('${p.id}',${i})">এডিট</button><button class="table-action ledger-delete" onclick="deleteLedgerEntry('${p.id}',${i})">মুছুন</button></div></div><div class="history-value ${t.type==='debt'?'debt':'deposit'}">${t.type==='debt'?'+':'−'} ${moneyFmt(t.amount)}</div></div>`).join('')||'<div class="muted" style="padding:25px;text-align:center;background:white">এখনও কোনো লেনদেন নেই। নিচের ধার বা জমা বোতাম থেকে শুরু করুন।</div>';
+document.getElementById('profileContent').innerHTML=`<div class="profile-appbar"><button onclick="closeProfile()">‹</button><div class="profile-avatar" style="background:#e9f2fc;color:#1459a4;border-radius:50%">${safePartyText((p.name||'?').slice(0,2).toUpperCase())}</div><div class="profile-app-title"><b>${safePartyText(p.name)} <span style="font-size:10px;background:#347dc5;padding:3px 6px;border-radius:5px">গ্রাহক</span></b><small onclick="openProfileSettings('${p.id}')" style="cursor:pointer">সেটিংস দেখুন</small></div><button class="profile-phone" onclick="${p.phone?`window.location.href='tel:${safePartyText(p.phone)}'`:''}">☎</button></div>
+<div class="profile-page-body"><div class="profile-page-balance"><div class="balance-main"><span>${b>=0?'আপনি পাবেন':'আপনি দেবেন'}</span><b>${moneyFmt(Math.abs(b))}</b></div><div class="profile-reminder"><span>♧ সংগ্রহের রিমাইন্ডার সেট করুন</span><button style="border:0;background:none;color:#155a9e;font-weight:700" onclick="alert('রিমাইন্ডার সুবিধাটি পরবর্তী সংস্করণে যুক্ত হবে।')">তারিখ ঠিক করুন</button></div></div>
+<div class="profile-shortcuts"><button onclick="alert('PDF রিপোর্ট সুবিধাটি পরবর্তী সংস্করণে যুক্ত হবে।')"><span>▣</span>রিপোর্ট</button><button onclick="alert('WhatsApp রিমাইন্ডার সুবিধাটি পরবর্তী সংস্করণে যুক্ত হবে।')"><span>◉</span>রিমাইন্ডার</button><button onclick="alert('SMS সুবিধাটি পরবর্তী সংস্করণে যুক্ত হবে।')"><span>▤</span>SMS</button></div>
+<div class="profile-date-label">${new Date().toLocaleDateString('bn-IN',{day:'2-digit',month:'short',year:'2-digit'})} · আজ</div><div class="profile-history-head"><span>এন্ট্রিগুলো</span><span style="text-align:center;color:#a21e36">আপনি দিয়েছেন</span><span style="text-align:right;color:#13805d">আপনি পেয়েছেন</span></div><div class="profile-page-history">${history}</div><div id="ledgerFormSlot"></div></div>
+<div class="profile-bottom-actions"><button onclick="showLedgerForm('${p.id}','debt')">আপনি দিয়েছেন　＋</button><button onclick="showLedgerForm('${p.id}','deposit')">আপনি পেয়েছেন　＋</button></div>`;}
+function renderProfileSettings(p){document.getElementById('profileContent').innerHTML=`<div class="profile-appbar"><button onclick="backToProfile()">‹</button><div class="profile-app-title"><b>গ্রাহক প্রোফাইল সেটিংস</b><small>${safePartyText(p.name)}</small></div></div><div class="profile-settings-page"><div class="profile-settings-section"><div class="profile-settings-row"><span class="setting-icon">♙</span><div class="setting-copy"><small>নাম</small><input id="profileEditName" value="${safePartyText(p.name)}"></div></div><div class="profile-settings-row"><span class="setting-icon">♧</span><div class="setting-copy"><small>মোবাইল নম্বর</small><input id="profileEditPhone" value="${safePartyText(p.phone||'')}" placeholder="মোবাইল নম্বর"></div></div><div class="profile-settings-row"><span class="setting-icon">⌖</span><div class="setting-copy"><small>ঠিকানা</small><input id="profileEditAddress" value="${safePartyText(p.address||'')}" placeholder="ঠিকানা যোগ করুন"></div></div></div><div class="profile-settings-label">গ্রাহক সেটিংস</div><div class="profile-settings-section"><div class="profile-settings-row"><span class="setting-icon">▤</span><div class="setting-copy"><b>লেনদেনের ইতিহাস</b><small>এই গ্রাহকের সব লেনদেনের হিস্টরি</small></div></div></div><button class="profile-settings-danger" style="border-color:#d99a37;color:#a15b00" onclick="clearPartyHistory('${p.id}')">▤　সব হিস্টরি মুছুন</button><button class="profile-settings-danger" onclick="deletePartyProfile('${p.id}')">▤　গ্রাহক মুছুন</button><div class="profile-settings-warning">সতর্কতা: সব হিস্টরি মুছলে এই গ্রাহকের ধার ও জমার রেকর্ড মুছে যাবে। গ্রাহক মুছলে তার সম্পূর্ণ প্রোফাইল ও খাতা মুছে যাবে। এই কাজ ফিরিয়ে আনা যাবে না।</div><div style="padding:18px 24px"><button class="btn" style="width:100%" onclick="saveProfileSettings('${p.id}')">পরিবর্তন সেভ করুন</button></div></div>`;}
+function saveProfileSettings(id){let p=parties.find(x=>x.id===id);if(!p)return;let name=document.getElementById('profileEditName').value.trim();if(!name){alert('নাম লিখুন।');return;}p.name=name;p.phone=document.getElementById('profileEditPhone').value.trim();p.address=document.getElementById('profileEditAddress').value.trim();persistParties();renderKhata();renderProfile(p);}
+
+function showLedgerForm(id,type){let p=parties.find(x=>x.id===id);if(!p)return;let isDebt=type==='debt';document.getElementById('ledgerFormSlot').innerHTML=`<div class="ledger-form"><b style="font-size:13px">${isDebt?'ধারের টাকা যোগ করুন':'জমা টাকা লিখুন'}</b><div class="formgrid" style="margin-top:10px"><div class="field"><label>টাকার পরিমাণ (₹) *</label><input id="ledgerAmount" type="number" min="0.01" step="0.01" placeholder="যেমন 2000"></div><div class="field"><label>বিবরণ (ঐচ্ছিক)</label><input id="ledgerNote" placeholder="${isDebt?'যেমন বালি নিয়েছে':'যেমন নগদ টাকা জমা'}"></div></div><div class="form-actions"><button class="btn secondary" onclick="document.getElementById('ledgerFormSlot').innerHTML=''">বাতিল</button><button class="btn" onclick="saveLedgerEntry('${id}','${type}')">${isDebt?'ধার সেভ করুন':'জমা সেভ করুন'}</button></div></div>`;document.getElementById('ledgerAmount').focus();}
+function saveLedgerEntry(id,type){let p=parties.find(x=>x.id===id);if(!p)return;let amount=Number(document.getElementById('ledgerAmount').value),note=document.getElementById('ledgerNote').value.trim();if(!Number.isFinite(amount)||amount<=0){alert('সঠিক টাকার পরিমাণ লিখুন।');return;}p.transactions.push({type,amount,note,at:new Date().toISOString()});persistParties();renderKhata();renderProfile(p);updateDashboardRange();renderReports();}
+function editLedgerEntry(id,index){let p=parties.find(x=>x.id===id),t=p&&p.transactions[index];if(!t)return;let esc=v=>String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;').replace(/'/g,'&#39;');document.getElementById('ledgerFormSlot').innerHTML=`<div class="ledger-form"><b style="font-size:13px">লেনদেন এডিট করুন</b><div class="formgrid" style="margin-top:10px"><div class="field"><label>লেনদেনের ধরন</label><select id="editLedgerType"><option value="debt" ${t.type==='debt'?'selected':''}>ধার / মাল নিয়েছে</option><option value="deposit" ${t.type==='deposit'?'selected':''}>জমা দিয়েছে</option></select></div><div class="field"><label>টাকার পরিমাণ (₹) *</label><input id="editLedgerAmount" type="number" min="0.01" step="0.01" value="${Number(t.amount)||0}"></div><div class="field"><label>বিবরণ</label><input id="editLedgerNote" value="${esc(t.note||'')}"></div></div><div class="form-actions"><button class="btn secondary" onclick="renderProfile(parties.find(x=>x.id==='${id}'))">বাতিল</button><button class="btn" onclick="updateLedgerEntry('${id}',${index})">পরিবর্তন সেভ করুন</button></div></div>`;document.getElementById('editLedgerAmount').focus();}
+function updateLedgerEntry(id,index){let p=parties.find(x=>x.id===id),t=p&&p.transactions[index];if(!t)return;let amount=Number(document.getElementById('editLedgerAmount').value);if(!Number.isFinite(amount)||amount<=0){alert('সঠিক টাকার পরিমাণ লিখুন।');return;}t.type=document.getElementById('editLedgerType').value;t.amount=amount;t.note=document.getElementById('editLedgerNote').value.trim();persistParties();renderKhata();renderProfile(p);updateDashboardRange();renderReports();}
+function deleteLedgerEntry(id,index){let p=parties.find(x=>x.id===id);if(!p||!p.transactions[index])return;if(!confirm('এই লেনদেনের ইতিহাসটি ডিলিট করবেন? এতে পাওনা/জমার হিসাবও পরিবর্তন হবে।'))return;p.transactions.splice(index,1);persistParties();renderKhata();renderProfile(p);updateDashboardRange();renderReports();}
+function clearPartyHistory(id){let p=parties.find(x=>x.id===id);if(!p)return;if(!p.transactions.length){alert('এই প্রোফাইলে কোনো লেনদেনের ইতিহাস নেই।');return;}if(!confirm('সতর্কতা! '+p.name+'-এর সব লেনদেনের ইতিহাস একসাথে ডিলিট হবে। এই কাজ আর ফিরিয়ে আনা যাবে না। আপনি কি নিশ্চিত?'))return;if(!confirm('শেষবার নিশ্চিত করুন: এই কাস্টমারের সব ধার ও জমার হিসাব মুছে দেবেন?'))return;p.transactions=[];persistParties();renderKhata();renderProfile(p);updateDashboardRange();renderReports();alert('এই কাস্টমারের সব লেনদেনের ইতিহাস ডিলিট হয়েছে।');}
+function deletePartyProfile(id){let p=parties.find(x=>x.id===id);if(!p)return;if(!confirm('সতর্কতা! '+p.name+'-এর পুরো প্রোফাইল ও তার সঙ্গে থাকা সব খাতা-ইতিহাস ডিলিট হবে। বিলের রেকর্ড আলাদা ভাবে থাকবে। আপনি কি নিশ্চিত?'))return;if(!confirm('শেষবার নিশ্চিত করুন: এই প্রোফাইলটি স্থায়ীভাবে ডিলিট করবেন?'))return;parties=parties.filter(x=>x.id!==id);persistParties();closeProfile();renderKhata();updateDashboardRange();renderReports();alert('কাস্টমারের প্রোফাইল ডিলিট হয়েছে।');}
+
+
+function getRangeDates(prefix='dash'){
+ const mode=document.getElementById(prefix==='dash'?'dashRange':'reportRange').value,now=new Date();let from=new Date(now),to=new Date(now);
+ from.setHours(0,0,0,0);to.setHours(23,59,59,999);
+ const fw=document.getElementById(prefix==='dash'?'dashFromWrap':'reportFromWrap'),tw=document.getElementById(prefix==='dash'?'dashToWrap':'reportToWrap');
+ if(mode==='yesterday'){fw.style.display='none';tw.style.display='none';from.setDate(from.getDate()-1);to=new Date(from);to.setHours(23,59,59,999);}
+ else if(mode==='custom'){
+  fw.style.display='block';tw.style.display='block';
+  const fv=document.getElementById(prefix==='dash'?'dashFrom':'reportFrom').value,tv=document.getElementById(prefix==='dash'?'dashTo':'reportTo').value;
+  if(!fv||!tv)return {from:null,to:null,caption:'শুরু ও শেষ তারিখ বেছে নিন'};
+  from=new Date(fv+'T00:00:00');to=new Date(tv+'T23:59:59.999');
+ }else if(mode!=='today'){fw.style.display='none';tw.style.display='none';from.setDate(from.getDate()-Number(mode)+1);}
+ else{fw.style.display='none';tw.style.display='none';}
+ const caption=mode==='today'?'আজকের হিসাব':mode==='yesterday'?'গতকালের হিসাব':mode==='7'?'গত ৭ দিনের হিসাব':mode==='30'?'গত ৩০ দিনের হিসাব':mode==='180'?'গত ৬ মাসের হিসাব':mode==='365'?'গত ১ বছরের হিসাব':mode==='3650'?'গত ১০ বছরের হিসাব':(from&&to?from.toLocaleDateString('bn-IN')+' – '+to.toLocaleDateString('bn-IN'):'তারিখ নির্বাচন করুন');
+ return {from,to,caption};
+}
+function selectedBills(prefix='dash'){
+ const r=getRangeDates(prefix);if(!r.from||!r.to||r.from>r.to)return {range:r,list:[]};
+ return {range:r,list:bills.filter(b=>{const d=new Date((b.date||'')+'T12:00:00');return d>=r.from&&d<=r.to;})};
+}
+function updateDashboardRange(){
+ const {range,list}=selectedBills('dash'),sales=list.reduce((n,b)=>n+Number(b.total||0),0),profit=list.reduce((n,b)=>n+Number(b.profit||0),0);
+ const due=parties.reduce((n,p)=>n+Math.max(0,partyBalance(p)),0);
+ document.getElementById('dashRangeCaption').textContent=range.caption;
+ document.getElementById('salesRangeFoot').textContent=range.caption;
+ document.getElementById('profitRangeFoot').textContent=range.caption;
+ document.getElementById('dashSalesValue').textContent=moneyFmt(sales);
+ document.getElementById('dashProfitValue').textContent=moneyFmt(profit);
+ document.getElementById('dashTotalDueValue').textContent=moneyFmt(due);
+ const recent=document.getElementById('dashRecentBills');if(recent)recent.innerHTML=bills.slice(0,5).map(b=>`<div class="rowline"><span>${escapeItemText(b.customer)} · ${escapeItemText(b.number)}</span><b>${moneyFmt(b.total)}</b></div>`).join('')||'এখনো কোনো বিল সেভ হয়নি।';
+}
+function renderReports(){
+ const {range,list}=selectedBills('report');
+ const total=list.reduce((n,b)=>n+Number(b.total||0),0),profit=list.reduce((n,b)=>n+Number(b.profit||0),0),paid=list.reduce((n,b)=>n+Number(b.paid||0),0);
+ document.getElementById('reportSales').textContent=moneyFmt(total);document.getElementById('reportProfit').textContent=moneyFmt(profit);document.getElementById('reportPaid').textContent=moneyFmt(paid);document.getElementById('reportCount').textContent=list.length.toLocaleString('bn-IN');
+ document.getElementById('reportRows').innerHTML=list.map(b=>`<tr><td>${escapeItemText(b.date)}</td><td>${escapeItemText(b.number)}</td><td>${escapeItemText(b.customer)}</td><td>${moneyFmt(b.total)}</td><td>${moneyFmt(b.profit)}</td><td>${moneyFmt(b.paid)}</td><td>${moneyFmt(b.due)}</td></tr>`).join('')||'<tr><td colspan="7" class="muted">এই সময়ে কোনো সেভ করা বিল নেই।</td></tr>';
+ const tx=[];if(range.from&&range.to)parties.forEach(p=>p.transactions.forEach(t=>{const d=new Date(t.at);if(d>=range.from&&d<=range.to)tx.push({p,t});}));
+ tx.sort((a,b)=>new Date(b.t.at)-new Date(a.t.at));
+ document.getElementById('ledgerReportRows').innerHTML=tx.map(({p,t})=>`<tr><td>${new Date(t.at).toLocaleString('bn-IN')}</td><td>${escapeItemText(p.name)}</td><td>${t.type==='debt'?'ধার':'জমা'}</td><td>${moneyFmt(t.amount)}</td><td>${escapeItemText(t.note||'—')}</td></tr>`).join('')||'<tr><td colspan="5" class="muted">এই সময়ে কোনো খাতা লেনদেন নেই।</td></tr>';
+}
+function exportBackup(){
+ const data={version:1,exportedAt:new Date().toISOString(),items,parties,bills,billSeq};
+ const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download='rahul-hardware-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(url);
+}
+function importBackup(event){
+ const file=event.target.files&&event.target.files[0];if(!file)return;
+ const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(reader.result);if(!Array.isArray(data.items)||!Array.isArray(data.parties)||!Array.isArray(data.bills))throw new Error('invalid');if(!confirm('বর্তমান ডেটার বদলে ব্যাকআপের ডেটা Restore করবেন?'))return;items=data.items;parties=data.parties;bills=data.bills;billSeq=Number(data.billSeq||0);persistItems();persistParties();persistBills();appStorage.setItem('rahulHardwareBillSeq',String(billSeq));renderItems();renderKhata();initBilling();renderReports();updateDashboardRange();alert('ব্যাকআপ সফলভাবে Restore হয়েছে।');}catch(e){alert('এই ফাইলটি সঠিক Rahul Hardware ব্যাকআপ নয়।');}finally{event.target.value='';}};reader.readAsText(file);
+}
+
+
+renderKhata();
+initBilling();
+renderReports();
+updateDashboardRange();
+
+// Integrated Sand Calculator module; isolated names prevent collisions with the shop app.
+(()=>{
+ const el=id=>document.getElementById(id);
+ const defaults=[{name:'শুধু সরু বালি',fine:65,coarse:0},{name:'শুধু মোটা বালি',fine:0,coarse:65},{name:'Mix',fine:30,coarse:35},{name:'Regular',fine:10.5,coarse:54.5}];
+ const readNum=id=>Math.max(0,Number(el(id).value)||0);
+ const money=n=>'₹'+Number(n.toFixed(2)).toLocaleString('en-IN',{maximumFractionDigits:2});
+ const fmt=n=>Number(n.toFixed(2)).toLocaleString('en-IN',{maximumFractionDigits:2});
+ let methods=defaults.map(x=>({...x})),capacity=65,gamlaSize=.7,fineRate=54,coarseRate=81,selected=3;
+ const get=(k,d)=>{try{let v=appStorage.getItem(k);return v===null?d:v}catch(e){return d}};
+ try{let v=JSON.parse(get('rahulSandMethodsV2','null'));if(Array.isArray(v)&&v.length===4)methods=v.map((x,i)=>({name:String(x.name||defaults[i].name),fine:Math.max(0,Number(x.fine)||0),coarse:Math.max(0,Number(x.coarse)||0)}));}catch(e){}
+ const valid=(v,d,min=0)=>Number.isFinite(Number(v))&&Number(v)>=min?Number(v):d;
+ capacity=valid(get('rahulTruckCapacityV1',65),65);gamlaSize=valid(get('rahulGamlaSizeV1',.7),.7,.000001);fineRate=valid(get('rahulFineRateV1',54),54);coarseRate=valid(get('rahulCoarseRateV1',81),81);
+ function applyGamla(){let f=readNum('sandGamlaCount')*gamlaSize;if(f>capacity){el('sandFineQty').value=fmt(f);el('sandCoarseQty').value=0;}else{el('sandFineQty').value=fmt(f);el('sandCoarseQty').value=fmt(capacity-f);}}
+ function renderPresets(){el('sandPresets').innerHTML='';methods.forEach((m,i)=>{let b=document.createElement('button');b.type='button';b.className='sand-preset'+(selected===i?' active':'');b.innerHTML=`<b>${i+1}. ${String(m.name).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}</b><small>সরু ${fmt(m.fine)} + মোটা ${fmt(m.coarse)} CFT</small>`;b.onclick=()=>{selected=i;if(i===3){el('sandGamlaCount').value=fmt(m.fine/gamlaSize);applyGamla();}else{el('sandGamlaCount').value=0;el('sandFineQty').value=m.fine;el('sandCoarseQty').value=m.coarse;}renderPresets();calculate();};el('sandPresets').appendChild(b);});}
+ function renderEditors(){el('sandEditors').innerHTML='';methods.forEach((m,i)=>{let d=document.createElement('div');d.className='sand-editor';d.innerHTML=`<b>${i+1}. মাপ ${i+1}</b><div style="margin-top:8px"><label>মাপের নাম</label><input data-i="${i}" data-k="name" value="${String(m.name).replace(/&/g,'&amp;').replace(/"/g,'&quot;')}"></div><div class="sand-grid" style="margin-top:8px"><div><label>সরু বালি (CFT)</label><input data-i="${i}" data-k="fine" type="number" min="0" step="0.1" value="${m.fine}"></div><div><label>মোটা বালি (CFT)</label><input data-i="${i}" data-k="coarse" type="number" min="0" step="0.1" value="${m.coarse}"></div></div>`;el('sandEditors').appendChild(d);});}
+ function calculate(){let f=readNum('sandFineQty'),c=readNum('sandCoarseQty'),t=readNum('sandTruck'),p=readNum('sandProfit'),vol=f+c,over=vol>capacity+1e-9;el('sandVolume').textContent=fmt(vol)+' CFT';el('sandRemaining').textContent=over?fmt(vol-capacity)+' CFT ওভারলোড':fmt(capacity-vol)+' CFT বাকি';el('sandWarning').classList.toggle('sand-hidden',!over);el('sandWarning').textContent=over?'সতর্কতা: ট্র্যাক্টরের ধারণক্ষমতার চেয়ে '+fmt(vol-capacity)+' CFT বেশি বালি হয়েছে।': '';el('sandFineTotal').textContent=money(f*fineRate);el('sandCoarseTotal').textContent=money(c*coarseRate);el('sandTruckTotal').textContent=money(t);el('sandProfitTotal').textContent=money(p);el('sandGrandTotal').textContent=money(f*fineRate+c*coarseRate+t+p);el('sandQuantityTotal').textContent='মোট '+fmt(vol)+' CFT বালি';}
+ ['sandTruck','sandProfit'].forEach(id=>el(id).addEventListener('input',calculate));['sandFineQty','sandCoarseQty'].forEach(id=>el(id).addEventListener('input',()=>{el('sandGamlaCount').value=0;calculate();}));el('sandGamlaCount').addEventListener('input',()=>{applyGamla();calculate();});
+ el('sandOpenSettings').onclick=()=>{el('sandAdmin').classList.remove('sand-hidden');el('sandOpenSettings').closest('.sand-card').classList.add('sand-hidden');el('sandFineRate').value=fineRate;el('sandCoarseRate').value=coarseRate;el('sandCapacity').value=capacity;el('sandGamlaSize').value=gamlaSize;renderEditors();};el('sandCloseSettings').onclick=()=>{el('sandAdmin').classList.add('sand-hidden');el('sandOpenSettings').closest('.sand-card').classList.remove('sand-hidden');};
+ el('sandSave').onclick=()=>{let gs=Number(el('sandGamlaSize').value),cap=Number(el('sandCapacity').value);if(!(gs>0)||!Number.isFinite(gs)||!(cap>0)||!Number.isFinite(cap)){el('sandSaveToast').textContent='গামলার মাপ ও ধারণক্ষমতা শূন্যের বেশি দিতে হবে।';return;}let updated=methods.map(x=>({...x}));el('sandEditors').querySelectorAll('input').forEach(i=>{let n=Number(i.dataset.i),k=i.dataset.k;updated[n][k]=k==='name'?(i.value.trim()||('মাপ '+(n+1))):Math.max(0,Number(i.value)||0);});methods=updated;capacity=cap;gamlaSize=gs;fineRate=Math.max(0,Number(el('sandFineRate').value)||0);coarseRate=Math.max(0,Number(el('sandCoarseRate').value)||0);try{appStorage.setItem('rahulSandMethodsV2',JSON.stringify(methods));appStorage.setItem('rahulTruckCapacityV1',String(capacity));appStorage.setItem('rahulGamlaSizeV1',String(gamlaSize));appStorage.setItem('rahulFineRateV1',String(fineRate));appStorage.setItem('rahulCoarseRateV1',String(coarseRate));renderPresets();calculate();el('sandSaveToast').textContent='✓ সব সেটিংস সেভ হয়েছে।';}catch(e){el('sandSaveToast').textContent='সেটিংস সেভ করা যায়নি।';}};
+ el('sandRestore').onclick=()=>{if(!confirm('বালির ক্যালকুলেটরের সব সেটিংস ডিফল্টে ফিরিয়ে আনবেন?'))return;methods=defaults.map(x=>({...x}));capacity=65;gamlaSize=.7;fineRate=54;coarseRate=81;selected=3;el('sandFineRate').value=54;el('sandCoarseRate').value=81;el('sandCapacity').value=65;el('sandGamlaSize').value=.7;try{appStorage.setItem('rahulSandMethodsV2',JSON.stringify(methods));appStorage.setItem('rahulTruckCapacityV1','65');appStorage.setItem('rahulGamlaSizeV1','0.7');appStorage.setItem('rahulFineRateV1','54');appStorage.setItem('rahulCoarseRateV1','81');}catch(e){}renderEditors();renderPresets();el('sandGamlaCount').value=15;applyGamla();calculate();el('sandSaveToast').textContent='ডিফল্ট সেটিংস ফিরিয়ে আনা হয়েছে।';};
+ el('sandCopy').onclick=async()=>{let f=readNum('sandFineQty'),c=readNum('sandCoarseQty'),t=readNum('sandTruck'),p=readNum('sandProfit'),vol=f+c,total=f*fineRate+c*coarseRate+t+p;let receipt=['RAHUL HARDWARE','বালির হিসাব',`সরু বালি: ${fmt(f)} CFT = ${money(f*fineRate)}`,`মোটা বালি: ${fmt(c)} CFT = ${money(c*coarseRate)}`,`মোট বালি: ${fmt(vol)} CFT`,`গাড়ি ভাড়া: ${money(t)}`,`আমার লাভ: ${money(p)}`,`সর্বমোট: ${money(total)}`].join(String.fromCharCode(10));try{await navigator.clipboard.writeText(receipt);el('sandToast').textContent='হিসাব কপি হয়েছে।';}catch(e){el('sandToast').textContent=receipt;}};
+ el('sandReset').onclick=()=>{el('sandGamlaCount').value=0;el('sandFineQty').value=0;el('sandCoarseQty').value=capacity;el('sandTruck').value=400;el('sandProfit').value=200;calculate();el('sandToast').textContent='নতুন হিসাব শুরু হয়েছে। অ্যাডমিন সেটিংস অক্ষত আছে।';};
+ renderPresets();renderEditors();el('sandGamlaCount').value=15;applyGamla();calculate();
+})();
+</script>
+<script>if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));}</script>
+</body></html>

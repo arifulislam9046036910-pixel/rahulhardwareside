@@ -1,0 +1,10 @@
+Rahul Hardware corrected demo — verification notes
+- JavaScript syntax parsed successfully with Node.js.
+- Chromium smoke-tested at 390x844 and 1365x900.
+- Opening/closing Settings did not change document height (no dashboard reflow).
+- Settings menu uses a fixed overlay and closes with button, outside click, or Escape.
+- All seven app sections were switched successfully in smoke tests.
+- Added a test item; it appeared in Calculator and Billing dropdowns.
+- No browser page errors during smoke tests.
+- PDF print template cleaned of accidental dashboard/settings CSS.
+- This is not an APK and has not undergone full production/device QA.

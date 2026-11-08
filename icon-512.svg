@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<rect width="512" height="512" rx="112" fill="#142d4e"/>
+<path d="M72 210 256 82l184 128v210H72z" fill="#fff"/>
+<path d="M112 230h288v190H112z" fill="#1769aa"/>
+<path d="M190 420V290h132v130" fill="#fff"/>
+<text x="256" y="265" font-family="Arial,sans-serif" font-size="64" font-weight="700" text-anchor="middle" fill="#fff">RH</text>
+</svg>
